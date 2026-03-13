@@ -1,6 +1,6 @@
-# CLAUDE.md — ploshtadka-notifications-ms
+# CLAUDE.md — brighter-notifications-ms
 
-FastAPI microservice for sending emails via Resend (part of the PloshtadkaBG platform).
+FastAPI microservice for sending emails via Resend (part of the BrighterProject platform).
 
 ## Package management
 
@@ -104,7 +104,7 @@ tests/
 |----------------------|----------------------------------------------|--------------------------------|
 | `DB_URL`             | `sqlite://:memory:`                          | Database connection string     |
 | `RESEND_API_KEY`     | `re_test_placeholder`                        | Resend API key                 |
-| `DEFAULT_FROM_EMAIL` | `Ploshtadka.BG <noreply@ploshtadka.bg>`      | Sender address                 |
+| `DEFAULT_FROM_EMAIL` | `Brighter.BG <noreply@brighter.bg>`      | Sender address                 |
 | `FRONTEND_BASE_URL`  | `http://localhost`                           | Frontend URL for email links   |
 
 ## Testing conventions

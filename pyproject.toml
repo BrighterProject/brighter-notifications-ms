@@ -1,7 +1,7 @@
 [project]
-name = "ploshtadka-notifications-ms"
+name = "brighter-notifications-ms"
 version = "0.1.0"
-description = "Notifications microservice for the PloshtadkaBG platform"
+description = "Notifications microservice for the BrighterProject platform"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

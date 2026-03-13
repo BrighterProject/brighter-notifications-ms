@@ -12,7 +12,7 @@ setup_logging()
 
 resend.api_key = resend_api_key
 
-application = FastAPI(title="ploshtadka-notifications-ms", redirect_slashes=False)
+application = FastAPI(title="brighter-notifications-ms", redirect_slashes=False)
 
 application.add_middleware(
     CORSMiddleware,
