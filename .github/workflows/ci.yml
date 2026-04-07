@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  IMAGE: ghcr.io/brighterbg/brighter-notifications-ms
+  IMAGE: ghcr.io/brighterproject/brighter-notifications-ms
 
 jobs:
   test:
