@@ -42,12 +42,48 @@ Auth is delegated entirely to Traefik via `forwardAuth`. JWT validation happens 
 
 ## Email sending
 
-This is an **internal service** — other microservices call `POST /notifications/send` over the Docker network to send emails. It uses Resend's Python SDK directly (no SMTP relay or mail server needed).
+This is an **internal service** — other microservices dispatch notifications over the Docker network. It uses Resend's Python SDK directly (no SMTP relay or mail server needed).
 
-### How other services call it
+### How other services call it (preferred method)
+
+Services call `POST /notifications/dispatch` with a notification type and data. The service renders the email subject + html based on the type:
 
 ```python
-# From bookings-ms, payments-ms, etc.
+# From bookings-ms, payments-ms, properties-ms
+resp = await notifications_client.send(
+    to="user@example.com",
+    notification_type="booking_confirmed",
+    data={}  # optional, depends on type
+)
+
+# This translates to:
+# POST http://notifications-ms:8004/notifications/dispatch
+# {
+#   "notification_type": "booking_confirmed",
+#   "to": "user@example.com",
+#   "data": {},
+#   "triggered_by": "bookings-ms"
+# }
+```
+
+### Notification types and data
+
+Each type renders a specific email subject + html. The `data` dict must contain the keys listed:
+
+| Type | Data keys | Notes |
+|------|-----------|-------|
+| `booking_created_guest` | `property_name`, `start_date`, `end_date` | Email to guest when booking received |
+| `booking_created_owner` | `property_name`, `start_date`, `end_date` | Email to owner when new booking request arrives |
+| `booking_confirmed` | *(none)* | Guest confirmation email |
+| `booking_cancelled` | *(none)* | Guest cancellation email |
+| `payment_receipt` | *(none)* | Guest payment confirmation |
+| `property_approved` | *(none)* | Owner property approval notification |
+
+### Legacy: POST /notifications/send
+
+The `/notifications/send` endpoint still works for backward compatibility but requires the caller to build subject + html:
+
+```python
 resp = await httpx_client.post(
     "http://notifications-ms:8004/notifications/send",
     json={
@@ -61,18 +97,21 @@ resp = await httpx_client.post(
 )
 ```
 
+**New code should use `/notifications/dispatch` instead.**
+
 ## Project structure
 
 ```
 app/
   settings.py          # DB_URL, RESEND_API_KEY, DEFAULT_FROM_EMAIL
   models.py            # Tortoise ORM model: Notification
-  schemas.py           # Pydantic: NotificationResponse, SendEmailRequest
+  schemas.py           # Pydantic: NotificationResponse, SendEmailRequest, DispatchRequest, NotificationType
   crud.py              # NotificationCRUD — logs sent/failed emails
   deps.py              # Auth deps, scope checkers
   scopes.py            # NotificationScope StrEnum
+  email_templates.py   # render(notification_type, data) — email content renderer
   routers/
-    notifications.py   # /notifications endpoints
+    notifications.py   # /notifications endpoints (/dispatch, /send, /list)
     health.py          # /health/live, /health/ready
 tests/
   conftest.py          # Fixtures: admin_client, anon_app, client_factory
@@ -91,12 +130,13 @@ tests/
 
 ## Endpoints
 
-| Method | Path                    | Scopes                       | Notes                        |
-|--------|-------------------------|------------------------------|------------------------------|
-| POST   | `/notifications/send`   | `admin:notifications:write`  | Send email via Resend        |
-| GET    | `/notifications/`       | `admin:notifications:read`   | List notification history    |
-| GET    | `/health/live`          | none                         | Liveness probe               |
-| GET    | `/health/ready`         | none                         | Readiness probe (DB check)   |
+| Method | Path                      | Scopes                       | Notes                                           |
+|--------|---------------------------|------------------------------|-------------------------------------------------|
+| POST   | `/notifications/dispatch` | `admin:notifications:write`  | Dispatch notification by type (preferred)       |
+| POST   | `/notifications/send`     | `admin:notifications:write`  | Send email with custom subject+html (legacy)    |
+| GET    | `/notifications/`         | `admin:notifications:read`   | List notification history                       |
+| GET    | `/health/live`            | none                         | Liveness probe                                  |
+| GET    | `/health/ready`           | none                         | Readiness probe (DB check)                      |
 
 ## Environment variables
 
