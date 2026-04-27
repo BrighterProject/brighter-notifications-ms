@@ -156,6 +156,105 @@ class TestMJMLTemplates:
         assert "Sofia" in html
         assert len(html) > 1000
 
+    def test_booking_confirmed_checkin_with_time(self):
+        """Check-in display includes time when check_in_time is provided."""
+        data = {
+            "booking_id": "BK-001",
+            "property_name": "Villa",
+            "start_date": "2026-07-10",
+            "end_date": "2026-07-17",
+            "check_in_time": "15:00",
+            "check_out_time": "11:00",
+            "num_guests": 2,
+            "num_nights": 7,
+            "total_price": "700",
+            "currency": "EUR",
+        }
+        _, html = render(NotificationType.BOOKING_CONFIRMED, data)
+        assert "2026-07-10 from 15:00" in html
+        assert "2026-07-17 by 11:00" in html
+
+    def test_booking_confirmed_checkin_without_time(self):
+        """Check-in display shows only date when check_in_time is absent."""
+        data = {
+            "booking_id": "BK-002",
+            "property_name": "Villa",
+            "start_date": "2026-07-10",
+            "end_date": "2026-07-17",
+            "num_guests": 2,
+            "num_nights": 7,
+            "total_price": "700",
+            "currency": "EUR",
+        }
+        _, html = render(NotificationType.BOOKING_CONFIRMED, data)
+        assert "2026-07-10" in html
+        assert "from" not in html or "2026-07-10 from" not in html
+        assert "2026-07-17" in html
+        assert "by" not in html or "2026-07-17 by" not in html
+
+    def test_payment_receipt_with_optional_fees(self):
+        """Both fee rows render when cleaning_fee and service_fee are provided."""
+        data = {
+            "receipt_id": "RC-001",
+            "payment_date": "2026-07-15",
+            "property_name": "Cabin",
+            "start_date": "2026-08-01",
+            "end_date": "2026-08-08",
+            "num_nights": 7,
+            "num_guests": 2,
+            "currency": "EUR",
+            "room_rate": "700",
+            "cleaning_fee": "50",
+            "service_fee": "30",
+            "total_amount": "780",
+            "payment_method": "Visa",
+        }
+        _, html = render(NotificationType.PAYMENT_RECEIPT, data)
+        assert "Cleaning Fee" in html
+        assert "EUR 50" in html
+        assert "Service Fee" in html
+        assert "EUR 30" in html
+
+    def test_payment_receipt_without_optional_fees(self):
+        """Fee rows are absent when cleaning_fee and service_fee are not provided."""
+        data = {
+            "receipt_id": "RC-002",
+            "payment_date": "2026-07-15",
+            "property_name": "Cabin",
+            "start_date": "2026-08-01",
+            "end_date": "2026-08-08",
+            "num_nights": 7,
+            "num_guests": 2,
+            "currency": "EUR",
+            "room_rate": "700",
+            "total_amount": "700",
+            "payment_method": "Visa",
+        }
+        _, html = render(NotificationType.PAYMENT_RECEIPT, data)
+        assert "Cleaning Fee" not in html
+        assert "Service Fee" not in html
+
+    def test_payment_receipt_with_only_cleaning_fee(self):
+        """Only cleaning fee row renders when service_fee is absent."""
+        data = {
+            "receipt_id": "RC-003",
+            "payment_date": "2026-07-15",
+            "property_name": "Cabin",
+            "start_date": "2026-08-01",
+            "end_date": "2026-08-08",
+            "num_nights": 7,
+            "num_guests": 2,
+            "currency": "EUR",
+            "room_rate": "700",
+            "cleaning_fee": "60",
+            "total_amount": "760",
+            "payment_method": "Visa",
+        }
+        _, html = render(NotificationType.PAYMENT_RECEIPT, data)
+        assert "Cleaning Fee" in html
+        assert "EUR 60" in html
+        assert "Service Fee" not in html
+
     def test_invalid_notification_type(self):
         """Test that invalid notification types raise an error."""
         with pytest.raises(ValueError, match="Unknown notification type"):

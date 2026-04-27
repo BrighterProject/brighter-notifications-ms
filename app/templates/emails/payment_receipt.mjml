@@ -88,12 +88,10 @@
           {{num_nights}}
         </mj-text>
 
-        {{#if num_guests}}
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Guests:</strong><br />
           {{num_guests}}
         </mj-text>
-        {{/if}}
       </mj-column>
     </mj-section>
 
@@ -113,18 +111,8 @@
             <td style="padding: 12px 12px 12px 0; color: #475569;">Room Rate × {{num_nights}} nights</td>
             <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{room_rate}}</td>
           </tr>
-          {{#if cleaning_fee}}
-          <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px 12px 12px 0; color: #475569;">Cleaning Fee</td>
-            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{cleaning_fee}}</td>
-          </tr>
-          {{/if}}
-          {{#if service_fee}}
-          <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px 12px 12px 0; color: #475569;">Service Fee</td>
-            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{service_fee}}</td>
-          </tr>
-          {{/if}}
+          {{cleaning_fee_row}}
+          {{service_fee_row}}
           <tr style="background-color: #f0fdf4;">
             <td style="padding: 12px 12px 12px 0; font-weight: 600; color: #15803d;">Total Paid</td>
             <td style="padding: 12px 12px 12px; text-align: right; font-weight: 600; color: #15803d;">{{currency}} {{total_amount}}</td>
