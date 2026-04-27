@@ -70,14 +70,16 @@ resp = await notifications_client.send(
 
 Each type renders a specific email subject + html. The `data` dict must contain the keys listed:
 
-| Type | Data keys | Notes |
-|------|-----------|-------|
-| `booking_created_guest` | `property_name`, `start_date`, `end_date` | Email to guest when booking received |
-| `booking_created_owner` | `property_name`, `start_date`, `end_date` | Email to owner when new booking request arrives |
-| `booking_confirmed` | *(none)* | Guest confirmation email |
-| `booking_cancelled` | *(none)* | Guest cancellation email |
-| `payment_receipt` | *(none)* | Guest payment confirmation |
-| `property_approved` | *(none)* | Owner property approval notification |
+URL variables (`view_booking_url`, `help_url`, `unsubscribe_url`, `privacy_url`, etc.) are injected automatically from `FRONTEND_BASE_URL` + `booking_id`/`property_id` from data.
+
+| Type | Required data keys | Optional data keys | Notes |
+|------|-------------------|--------------------|-------|
+| `booking_created_guest` | `property_name`, `start_date`, `end_date` | `booking_id` | Email to guest when booking received |
+| `booking_created_owner` | `property_name`, `start_date`, `end_date` | `booking_id` | Email to owner when new booking arrives |
+| `booking_confirmed` | `booking_id`, `property_name`, `start_date`, `end_date`, `check_in_time`, `check_out_time`, `num_guests`, `num_nights`, `currency`, `total_price` | `property_id` | Guest confirmation email |
+| `booking_cancelled` | `booking_id`, `property_name`, `start_date`, `end_date`, `cancelled_date`, `currency`, `refund_amount` | — | Guest cancellation email |
+| `payment_receipt` | `receipt_id`, `payment_date`, `property_name`, `start_date`, `end_date`, `num_nights`, `num_guests`, `currency`, `room_rate`, `total_amount`, `payment_method` | `booking_id`, `cleaning_fee`, `service_fee` | Guest payment confirmation |
+| `property_approved` | `property_name`, `property_city`, `property_type`, `max_guests` | `property_id` | Owner property approval notification |
 
 ### Legacy: POST /notifications/send
 

@@ -57,7 +57,7 @@
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
           Your property has been thoroughly reviewed and approved by our team. It is now visible to guests searching on Brighter and ready to receive bookings.
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -68,34 +68,29 @@
           Your Property
         </mj-text>
 
-        <!-- Property Name -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Property Name:</strong><br />
-          <mj-raw>{{property_name}}</mj:raw>
-        </mj:text>
-
-        <!-- Location -->
-        <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Location:</strong><br />
-          <mj-raw>{{property_city}}, Bulgaria</mj:raw>
-        </mj:text>
-
-        <!-- Property Type -->
-        <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Property Type:</strong><br />
-          <mj-raw>{{property_type}}</mj:raw>
+          {{property_name}}
         </mj-text>
 
-        <!-- Guest Capacity -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Location:</strong><br />
+          {{property_city}}, Bulgaria
+        </mj-text>
+
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Property Type:</strong><br />
+          {{property_type}}
+        </mj-text>
+
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Capacity:</strong><br />
-          <mj-raw>Up to {{max_guests}} guests</mj:raw>
-        </mj:text>
+          Up to {{max_guests}} guests
+        </mj-text>
 
-        <!-- Status -->
         <mj-text mj-class="body-text" padding="16px 0 0" font-weight="600" color="#16a34a">
           Status: LIVE
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -104,27 +99,27 @@
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
           Getting Started
-        </mj:text>
+        </mj-text>
 
         <mj-text mj-class="body-text" padding="0">
           <strong>1. Review Your Listing</strong><br />
           Check your property page to ensure all information is correct and photos look great.
-        </mj:text>
+        </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>2. Set Up Your Calendar</strong><br />
           Mark dates as available or unavailable to control your booking availability.
-        </mj:text>
+        </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>3. Prepare for Guests</strong><br />
           Set house rules, check-in/check-out times, and response time preferences.
-        </mj:text>
+        </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>4. Respond to Inquiries</strong><br />
           Reply promptly to booking requests to increase your approval rate.
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -133,7 +128,7 @@
       <mj-column padding="20px" background-color="#f8fafc">
         <mj-text mj-class="heading-2" padding="0 0 12px">
           Quick Stats
-        </mj:text>
+        </mj-text>
 
         <mj-table>
           <tr style="text-align: center; border-bottom: 1px solid #e2e8f0;">
@@ -157,13 +152,13 @@
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
           Helpful Resources
-        </mj:text>
+        </mj-text>
         <mj-text mj-class="body-text" padding="0">
           <a href="{{view_listing_url}}" style="color:#2563eb; text-decoration:none;">View Your Listing</a> • <a href="{{owner_dashboard_url}}" style="color:#2563eb; text-decoration:none;">Owner Dashboard</a>
-        </mj:text>
+        </mj-text>
         <mj-text mj-class="body-text" padding="8px 0 0">
           <a href="{{host_guide_url}}" style="color:#2563eb; text-decoration:none;">Host Guide</a> • <a href="{{best_practices_url}}" style="color:#2563eb; text-decoration:none;">Best Practices</a>
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -177,7 +172,7 @@
       <mj-column padding="0 10px">
         <mj-button href="{{owner_dashboard_url}}" background-color="#2563eb" color="#ffffff" align="center" width="100%">
           Go to Dashboard
-        </mj:button>
+        </mj-button>
       </mj-column>
     </mj-section>
 
@@ -192,7 +187,7 @@
           • <strong>Keep photos updated</strong> to showcase your property<br />
           • <strong>Maintain house rules</strong> for guest safety and satisfaction<br />
           • <strong>Be professional</strong> in all guest communications
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -201,10 +196,10 @@
       <mj-column padding="20px" background-color="#f8fafc">
         <mj-text mj-class="body-text" padding="0" color="#64748b">
           Have questions about hosting? Our support team is ready to help.
-        </mj:text>
+        </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
           <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -213,10 +208,10 @@
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
           © 2026 Brighter.BG. All rights reserved.
-        </mj:text>
+        </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
           <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
   </mj-body>

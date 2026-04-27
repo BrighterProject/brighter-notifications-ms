@@ -60,37 +60,37 @@
         <!-- Booking Reference -->
         <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
           <strong>Confirmation Number:</strong><br />
-          <mj-raw>{{booking_id}}</mj-raw>
+          {{booking_id}}
         </mj-text>
 
         <!-- Property Details -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Property:</strong><br />
-          <mj-raw>{{property_name}}</mj-raw>
+          {{property_name}}
         </mj-text>
 
         <!-- Dates -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Check-in:</strong><br />
-          <mj-raw>{{start_date}} from {{check_in_time}}</mj-raw>
+          {{start_date}} from {{check_in_time}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Check-out:</strong><br />
-          <mj-raw>{{end_date}} by {{check_out_time}}</mj-raw>
+          {{end_date}} by {{check_out_time}}
         </mj-text>
 
         <!-- Guests -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Guests:</strong><br />
-          <mj-raw>{{num_guests}}</mj-raw>
+          {{num_guests}}
         </mj-text>
 
         <!-- Price Summary -->
         <mj-divider border-color="#e2e8f0" border-width="1px" padding="16px 0 12px" />
 
         <mj-text mj-class="body-text" padding="0" font-weight="600">
-          <mj-raw>{{currency}} {{total_price}}</mj-raw> for <mj-raw>{{num_nights}}</mj-raw> nights
+          {{currency}} {{total_price}} for {{num_nights}} nights
         </mj-text>
       </mj-column>
     </mj-section>

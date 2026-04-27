@@ -56,15 +56,13 @@
           Payment Receipt
         </mj-text>
 
-        <!-- Receipt Number -->
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          <strong>Receipt #:</strong> <mj-raw>{{receipt_id}}</mj:raw>
+          <strong>Receipt #:</strong> {{receipt_id}}
         </mj-text>
 
-        <!-- Payment Date -->
         <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
-          <strong>Date:</strong> <mj-raw>{{payment_date}}</mj:raw>
-        </mj:text>
+          <strong>Date:</strong> {{payment_date}}
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -75,29 +73,25 @@
           Booking Details
         </mj-text>
 
-        <!-- Property -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Property:</strong><br />
-          <mj-raw>{{property_name}}</mj:raw>
+          {{property_name}}
         </mj-text>
 
-        <!-- Dates -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Check-in – Check-out:</strong><br />
-          <mj-raw>{{start_date}} – {{end_date}}</mj:raw>
+          {{start_date}} – {{end_date}}
         </mj-text>
 
-        <!-- Nights -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Number of Nights:</strong><br />
-          <mj-raw>{{num_nights}}</mj:raw>
-        </mj:text>
+          {{num_nights}}
+        </mj-text>
 
-        <!-- Guests -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Guests:</strong><br />
-          <mj-raw>{{num_guests}}</mj:raw>
-        </mj:text>
+          {{num_guests}}
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -114,28 +108,24 @@
             <th style="padding: 0 12px 8px; text-align: right; font-weight: 600; color: #0f172a;">Amount</th>
           </tr>
           <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px 12px 12px 0; color: #475569;">Room Rate × <mj-raw>{{num_nights}}</mj:raw> nights</td>
-            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;"><mj-raw>{{currency}} {{room_rate}}</mj:raw></td>
+            <td style="padding: 12px 12px 12px 0; color: #475569;">Room Rate × {{num_nights}} nights</td>
+            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{room_rate}}</td>
           </tr>
-          <mj-raw>
-            {{#if cleaning_fee}}
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-              <td style="padding: 12px 12px 12px 0; color: #475569;">Cleaning Fee</td>
-              <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{cleaning_fee}}</td>
-            </tr>
-            {{/if}}
-          </mj-raw>
-          <mj-raw>
-            {{#if service_fee}}
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-              <td style="padding: 12px 12px 12px 0; color: #475569;">Service Fee</td>
-              <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{service_fee}}</td>
-            </tr>
-            {{/if}}
-          </mj-raw>
+          {{#if cleaning_fee}}
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px 12px 12px 0; color: #475569;">Cleaning Fee</td>
+            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{cleaning_fee}}</td>
+          </tr>
+          {{/if}}
+          {{#if service_fee}}
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px 12px 12px 0; color: #475569;">Service Fee</td>
+            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{service_fee}}</td>
+          </tr>
+          {{/if}}
           <tr style="background-color: #f0fdf4;">
             <td style="padding: 12px 12px 12px 0; font-weight: 600; color: #15803d;">Total Paid</td>
-            <td style="padding: 12px 12px 12px; text-align: right; font-weight: 600; color: #15803d;"><mj-raw>{{currency}} {{total_amount}}</mj:raw></td>
+            <td style="padding: 12px 12px 12px; text-align: right; font-weight: 600; color: #15803d;">{{currency}} {{total_amount}}</td>
           </tr>
         </mj-table>
       </mj-column>
@@ -146,10 +136,10 @@
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="heading-2" padding="0 0 12px">
           Payment Method
-        </mj:text>
+        </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <mj-raw>{{payment_method}}</mj:raw>
-        </mj:text>
+          {{payment_method}}
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -161,13 +151,13 @@
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
           <strong>1. Check-in Info:</strong> You'll receive check-in details 24 hours before arrival.
-        </mj:text>
+        </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>2. Contact Info:</strong> The owner will provide contact details for questions before arrival.
-        </mj:text>
-        <mj:text mj-class="body-text" padding="12px 0">
+        </mj-text>
+        <mj-text mj-class="body-text" padding="12px 0">
           <strong>3. Enjoy:</strong> Check in and enjoy your stay! Don't forget to follow house rules.
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -181,9 +171,9 @@
     </mj-section>
 
     <!-- Download Receipt -->
-    <mj-section padding="20px" text-align="center">
+    <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f8fafc">
-        <mj-text mj-class="footer-text" padding="0">
+        <mj-text mj-class="footer-text" padding="0" align="center">
           <a href="{{download_receipt_url}}" style="color:#2563eb; text-decoration:none;">Download Receipt</a>
         </mj-text>
       </mj-column>

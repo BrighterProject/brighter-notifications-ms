@@ -59,18 +59,18 @@
         <!-- Property Name -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Property:</strong><br />
-          <mj-raw>{{property_name}}</mj-raw>
+          {{property_name}}
         </mj-text>
 
         <!-- Check-in & Check-out -->
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Check-in:</strong><br />
-          <mj-raw>{{start_date}}</mj-raw>
+          {{start_date}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Check-out:</strong><br />
-          <mj-raw>{{end_date}}</mj-raw>
+          {{end_date}}
         </mj-text>
 
         <!-- Status Badge -->

@@ -1,4 +1,4 @@
-import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -6,6 +6,25 @@ from typing import Any
 from loguru import logger
 
 TEMPLATES_DIR = Path(__file__).parent / "templates" / "emails"
+
+
+def _apply_conditionals(content: str, data: dict[str, Any]) -> str:
+    """Evaluate {{#if variable}}...{{/if}} blocks before MJML compilation."""
+
+    def replace_block(m: re.Match) -> str:
+        var_name = m.group(1)
+        block_content = m.group(2)
+        value = data.get(var_name)
+        if value is not None and str(value).strip():
+            return block_content
+        return ""
+
+    return re.sub(
+        r"\{\{#if\s+(\w+)\}\}(.*?)\{\{/if\}\}",
+        replace_block,
+        content,
+        flags=re.DOTALL,
+    )
 
 
 def compile_mjml(mjml_path: str) -> str:
@@ -65,8 +84,10 @@ def render_mjml_template(
     # Read the MJML template
     mjml_content = mjml_path.read_text()
 
+    # Evaluate {{#if variable}}...{{/if}} blocks first
+    mjml_content = _apply_conditionals(mjml_content, data)
+
     # Simple Handlebars rendering: {{key}} → value
-    # Escape HTML entities in values
     for key, value in data.items():
         if value is not None:
             # Convert non-strings to strings

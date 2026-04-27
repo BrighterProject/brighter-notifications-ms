@@ -59,25 +59,25 @@
         <!-- Booking Reference -->
         <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
           <strong>Booking ID:</strong><br />
-          <mj-raw>{{booking_id}}</mj-raw>
+          {{booking_id}}
         </mj-text>
 
         <!-- Property -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Property:</strong><br />
-          <mj-raw>{{property_name}}</mj-raw>
+          {{property_name}}
         </mj-text>
 
         <!-- Original Dates -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Original Dates:</strong><br />
-          <mj-raw>{{start_date}} – {{end_date}}</mj-raw>
+          {{start_date}} – {{end_date}}
         </mj-text>
 
         <!-- Cancellation Date -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Cancelled On:</strong><br />
-          <mj-raw>{{cancelled_date}}</mj:text>
+          {{cancelled_date}}
         </mj-text>
       </mj-column>
     </mj-section>
@@ -89,14 +89,14 @@
           Refund Status
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <strong>Refund Amount:</strong> <mj-raw>{{currency}} {{refund_amount}}</mj:raw>
+          <strong>Refund Amount:</strong> {{currency}} {{refund_amount}}
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Timeline:</strong> Refunds are typically processed within 5-7 business days. You'll receive a confirmation email when processed.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Cancellation Policy:</strong> Your refund was processed according to the property's cancellation policy.
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -108,7 +108,7 @@
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
           We hope you'll consider Brighter for your future travel plans. Browse other properties that match your dates and budget.
-        </mj:text>
+        </mj-text>
       </mj-column>
     </mj-section>
 
