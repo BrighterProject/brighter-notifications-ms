@@ -88,10 +88,12 @@
           {{num_nights}}
         </mj-text>
 
+        {{#if num_guests}}
         <mj-text mj-class="body-text" padding="8px 0">
           <strong>Guests:</strong><br />
           {{num_guests}}
         </mj-text>
+        {{/if}}
       </mj-column>
     </mj-section>
 
