@@ -72,19 +72,21 @@
         <!-- Dates -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Check-in:</strong><br />
-          {{start_date}} from {{check_in_time}}
+          {{start_date}}{{#if check_in_time}} from {{check_in_time}}{{/if}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Check-out:</strong><br />
-          {{end_date}} by {{check_out_time}}
+          {{end_date}}{{#if check_out_time}} by {{check_out_time}}{{/if}}
         </mj-text>
 
+        {{#if num_guests}}
         <!-- Guests -->
         <mj-text mj-class="body-text" padding="12px 0">
           <strong>Guests:</strong><br />
           {{num_guests}}
         </mj-text>
+        {{/if}}
 
         <!-- Price Summary -->
         <mj-divider border-color="#e2e8f0" border-width="1px" padding="16px 0 12px" />
