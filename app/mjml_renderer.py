@@ -7,6 +7,10 @@ from loguru import logger
 
 TEMPLATES_DIR = Path(__file__).parent / "templates" / "emails"
 
+# Use the local binary directly — avoids the ~1-2s npx package-resolution overhead per call
+_MJML_BIN = Path(__file__).parent.parent / "node_modules" / ".bin" / "mjml"
+_MJML_CMD = str(_MJML_BIN) if _MJML_BIN.exists() else "mjml"
+
 
 def _apply_conditionals(content: str, data: dict[str, Any]) -> str:
     """Evaluate {{#if variable}}...{{/if}} blocks before MJML compilation."""
@@ -35,8 +39,7 @@ def compile_mjml(mjml_path: str) -> str:
     try:
         result = subprocess.run(
             [
-                "npx",
-                "mjml",
+                _MJML_CMD,
                 mjml_path,
                 "-o",
                 "/dev/stdout",
