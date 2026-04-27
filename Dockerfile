@@ -7,21 +7,26 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# System deps (build tools + Postgres client libs for asyncpg)
+# System deps (build tools + Postgres client libs for asyncpg + Node.js for MJML)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       build-essential \
       libpq-dev \
-      curl && \
+      curl \
+      nodejs \
+      npm && \
     rm -rf /var/lib/apt/lists/*
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Copy dependency metadata first for better Docker layer caching
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock package.json package-lock.json ./
 
-# Install dependencies (without project source — for better cache hit rate)
+# Install Node.js dependencies (MJML)
+RUN npm ci --production
+
+# Install Python dependencies (without project source — for better cache hit rate)
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \

@@ -1,0 +1,157 @@
+<mjml lang="en" dir="ltr">
+  <mj-head>
+    <mj-title>New Booking Request - Brighter</mj-title>
+    <mj-preview>New booking request for {{property_name}}</mj-preview>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Inter, Arial, sans-serif" />
+      <mj-text padding="0" line-height="1.6" color="#1e293b" />
+      <mj-button font-weight="600" border-radius="6px" inner-padding="12px 28px" />
+      <mj-class name="heading-1" font-size="32px" font-weight="700" color="#0f172a" />
+      <mj-class name="heading-2" font-size="20px" font-weight="600" color="#0f172a" />
+      <mj-class name="body-text" font-size="14px" color="#475569" />
+      <mj-class name="footer-text" font-size="12px" color="#94a3b8" />
+    </mj-attributes>
+    <mj-raw>
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+    </mj-raw>
+    <mj-style inline="inline">
+      .dark-logo { display: none !important; }
+    </mj-style>
+    <mj-style>
+      @media (prefers-color-scheme: dark) {
+        .light-logo { display: none !important; }
+        .dark-logo { display: block !important; }
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f8fafc">
+    <!-- Header -->
+    <mj-section padding="20px 0" background-color="#ffffff">
+      <mj-column padding="20px">
+        <mj-text mj-class="heading-2" color="#2563eb">
+          Brighter
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#f59e0b" background-size="cover" padding="40px 20px">
+      <mj-column padding="0">
+        <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
+          New Booking Request
+        </mj-text>
+        <mj-text mj-class="body-text" color="#fef3c7" align="center" padding="12px 20px 0">
+          Action required: Please review and confirm this booking
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Booking Details Card -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 16px">
+          Booking Information
+        </mj-text>
+
+        <!-- Property Name -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Property:</strong><br />
+          <mj-raw>{{property_name}}</mj-raw>
+        </mj-text>
+
+        <!-- Check-in & Check-out -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Check-in:</strong><br />
+          <mj-raw>{{start_date}}</mj-raw>
+        </mj-text>
+
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Check-out:</strong><br />
+          <mj-raw>{{end_date}}</mj-raw>
+        </mj-text>
+
+        <!-- Status Badge -->
+        <mj-text mj-class="body-text" padding="16px 0 0" color="#dc2626" font-weight="600">
+          ⏳ Awaiting Your Response
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Guest Information (if available) -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f8fafc" border-left="4px solid #2563eb">
+        <mj-text mj-class="heading-2" padding="0 0 12px">
+          Guest Information
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          The guest will receive updates about their booking status, so respond promptly.
+        </mj-text>
+        <mj-text mj-class="body-text" padding="12px 0">
+          Once you confirm, the guest can proceed with payment and complete their reservation.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Action Buttons -->
+    <mj-section padding="20px">
+      <mj-column padding="0 10px">
+        <mj-button href="{{approve_url}}" background-color="#16a34a" color="#ffffff" align="center" width="100%">
+          ✓ Confirm Booking
+        </mj-button>
+      </mj-column>
+      <mj-column padding="0 10px">
+        <mj-button href="{{decline_url}}" background-color="#dc2626" color="#ffffff" align="center" width="100%">
+          ✕ Decline Booking
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Quick Actions -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 12px">
+          Review in Dashboard
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          You can also view and manage all booking requests from your owner dashboard.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Dashboard Link -->
+    <mj-section padding="20px">
+      <mj-column>
+        <mj-button href="{{dashboard_url}}" background-color="#2563eb" color="#ffffff" align="center" padding="16px">
+          Go to Dashboard
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Support -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f1f5f9">
+        <mj-text mj-class="body-text" padding="0" color="#64748b">
+          Need help managing your booking? Contact our support team.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Owner Help</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
+      <mj-column padding="20px">
+        <mj-text mj-class="footer-text" padding="0">
+          © 2026 Brighter.BG. All rights reserved.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0">
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

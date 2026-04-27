@@ -1,0 +1,216 @@
+<mjml lang="en" dir="ltr">
+  <mj-head>
+    <mj-title>Payment Receipt - Brighter</mj-title>
+    <mj-preview>Payment received for your booking</mj-preview>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Inter, Arial, sans-serif" />
+      <mj-text padding="0" line-height="1.6" color="#1e293b" />
+      <mj-button font-weight="600" border-radius="6px" inner-padding="12px 28px" />
+      <mj-class name="heading-1" font-size="32px" font-weight="700" color="#0f172a" />
+      <mj-class name="heading-2" font-size="20px" font-weight="600" color="#0f172a" />
+      <mj-class name="body-text" font-size="14px" color="#475569" />
+      <mj-class name="footer-text" font-size="12px" color="#94a3b8" />
+    </mj-attributes>
+    <mj-raw>
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+    </mj-raw>
+    <mj-style inline="inline">
+      .dark-logo { display: none !important; }
+    </mj-style>
+    <mj-style>
+      @media (prefers-color-scheme: dark) {
+        .light-logo { display: none !important; }
+        .dark-logo { display: block !important; }
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f8fafc">
+    <!-- Header -->
+    <mj-section padding="20px 0" background-color="#ffffff">
+      <mj-column padding="20px">
+        <mj-text mj-class="heading-2" color="#2563eb">
+          Brighter
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#16a34a" padding="40px 20px">
+      <mj-column padding="0">
+        <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
+          ✓ Payment Received
+        </mj-text>
+        <mj-text mj-class="body-text" color="#dcfce7" align="center" padding="12px 20px 0">
+          Thank you! Your payment has been processed successfully
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Receipt Header -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 16px">
+          Payment Receipt
+        </mj-text>
+
+        <!-- Receipt Number -->
+        <mj-text mj-class="body-text" padding="0" color="#64748b">
+          <strong>Receipt #:</strong> <mj-raw>{{receipt_id}}</mj:raw>
+        </mj-text>
+
+        <!-- Payment Date -->
+        <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
+          <strong>Date:</strong> <mj-raw>{{payment_date}}</mj:raw>
+        </mj:text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Booking Details -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f8fafc">
+        <mj-text mj-class="heading-2" padding="0 0 16px">
+          Booking Details
+        </mj-text>
+
+        <!-- Property -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Property:</strong><br />
+          <mj-raw>{{property_name}}</mj:raw>
+        </mj-text>
+
+        <!-- Dates -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Check-in – Check-out:</strong><br />
+          <mj-raw>{{start_date}} – {{end_date}}</mj:raw>
+        </mj-text>
+
+        <!-- Nights -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Number of Nights:</strong><br />
+          <mj-raw>{{num_nights}}</mj:raw>
+        </mj:text>
+
+        <!-- Guests -->
+        <mj-text mj-class="body-text" padding="8px 0">
+          <strong>Guests:</strong><br />
+          <mj-raw>{{num_guests}}</mj:raw>
+        </mj:text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Payment Summary Table -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 16px">
+          Payment Summary
+        </mj-text>
+
+        <mj-table>
+          <tr style="border-bottom: 1px solid #e2e8f0; text-align: left;">
+            <th style="padding: 0 12px 8px 0; font-weight: 600; color: #0f172a;">Description</th>
+            <th style="padding: 0 12px 8px; text-align: right; font-weight: 600; color: #0f172a;">Amount</th>
+          </tr>
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px 12px 12px 0; color: #475569;">Room Rate × <mj-raw>{{num_nights}}</mj:raw> nights</td>
+            <td style="padding: 12px 12px 12px; text-align: right; color: #475569;"><mj-raw>{{currency}} {{room_rate}}</mj:raw></td>
+          </tr>
+          <mj-raw>
+            {{#if cleaning_fee}}
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 12px 12px 12px 0; color: #475569;">Cleaning Fee</td>
+              <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{cleaning_fee}}</td>
+            </tr>
+            {{/if}}
+          </mj-raw>
+          <mj-raw>
+            {{#if service_fee}}
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 12px 12px 12px 0; color: #475569;">Service Fee</td>
+              <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{service_fee}}</td>
+            </tr>
+            {{/if}}
+          </mj-raw>
+          <tr style="background-color: #f0fdf4;">
+            <td style="padding: 12px 12px 12px 0; font-weight: 600; color: #15803d;">Total Paid</td>
+            <td style="padding: 12px 12px 12px; text-align: right; font-weight: 600; color: #15803d;"><mj-raw>{{currency}} {{total_amount}}</mj:raw></td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Payment Method -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f1f5f9">
+        <mj-text mj-class="heading-2" padding="0 0 12px">
+          Payment Method
+        </mj:text>
+        <mj-text mj-class="body-text" padding="0">
+          <mj-raw>{{payment_method}}</mj:raw>
+        </mj:text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Next Steps -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 12px">
+          What's Next?
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          <strong>1. Check-in Info:</strong> You'll receive check-in details 24 hours before arrival.
+        </mj:text>
+        <mj-text mj-class="body-text" padding="12px 0">
+          <strong>2. Contact Info:</strong> The owner will provide contact details for questions before arrival.
+        </mj:text>
+        <mj:text mj-class="body-text" padding="12px 0">
+          <strong>3. Enjoy:</strong> Check in and enjoy your stay! Don't forget to follow house rules.
+        </mj:text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA -->
+    <mj-section padding="20px">
+      <mj-column>
+        <mj-button href="{{view_booking_url}}" background-color="#2563eb" color="#ffffff" align="center" padding="16px">
+          View Your Booking
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Download Receipt -->
+    <mj-section padding="20px" text-align="center">
+      <mj-column padding="20px" background-color="#f8fafc">
+        <mj-text mj-class="footer-text" padding="0">
+          <a href="{{download_receipt_url}}" style="color:#2563eb; text-decoration:none;">Download Receipt</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Support -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f1f5f9">
+        <mj-text mj-class="body-text" padding="0" color="#64748b">
+          Questions about your payment? Contact support.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
+      <mj-column padding="20px">
+        <mj-text mj-class="footer-text" padding="0">
+          © 2026 Brighter.BG. All rights reserved.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0">
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

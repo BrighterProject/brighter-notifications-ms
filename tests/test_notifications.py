@@ -146,7 +146,8 @@ class TestDispatchNotification:
 
         call_args = mock_resend.Emails.send.call_args
         sent_params = call_args[0][0]
-        assert sent_params["subject"] == "Booking received — Cozy Apartment"
+        # Subject comes from MJML template mj-title
+        assert sent_params["subject"] == "Booking Received - Brighter"
         assert "Cozy Apartment" in sent_params["html"]
 
     @pytest.mark.asyncio

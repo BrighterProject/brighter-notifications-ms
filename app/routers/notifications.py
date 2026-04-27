@@ -2,8 +2,7 @@ import resend
 from fastapi import APIRouter, Depends, status
 from loguru import logger
 
-from app import settings
-from app import email_templates
+from app import email_templates, settings
 from app.crud import notification_crud
 from app.deps import can_read_notifications, can_send_notification
 from app.schemas import DispatchRequest, NotificationResponse, SendEmailRequest

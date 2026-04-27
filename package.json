@@ -1,0 +1,12 @@
+{
+  "name": "brighter-notifications-ms",
+  "version": "0.1.0",
+  "description": "Notifications microservice for the Brighter platform - MJML email templates",
+  "type": "module",
+  "devDependencies": {
+    "mjml": "^4.15.3"
+  },
+  "scripts": {
+    "compile-emails": "mjml app/templates/emails/*.mjml -o dist/ --config.minify=true"
+  }
+}
