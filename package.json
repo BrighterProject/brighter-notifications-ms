@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Notifications microservice for the Brighter platform - MJML email templates",
   "type": "module",
-  "devDependencies": {
+  "dependencies": {
     "mjml": "^4.15.3"
   },
   "scripts": {
