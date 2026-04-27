@@ -8,3 +8,5 @@ htmlcov/
 .ruff_cache/
 dist/
 *.egg-info/
+node_modules/
+bun.lock

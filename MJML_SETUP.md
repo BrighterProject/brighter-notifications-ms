@@ -98,7 +98,7 @@ Each template requires specific variables in the `data` dict:
     "end_date": "2026-06-07",
     "approve_url": "https://brighter.bg/approve/123",
     "decline_url": "https://brighter.bg/decline/123",
-    "dashboard_url": "https://brighter.bg/dashboard",
+    "dashboard_url": "https://brighter.bg/admin/dashboard",
     "help_url": "https://brighter.bg/help",
     "unsubscribe_url": "https://brighter.bg/unsubscribe",
     "privacy_url": "https://brighter.bg/privacy",
