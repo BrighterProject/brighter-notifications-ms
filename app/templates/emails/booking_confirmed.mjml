@@ -80,12 +80,6 @@
           {{checkout_display}}
         </mj-text>
 
-        <!-- Guests -->
-        <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Guests:</strong><br />
-          {{num_guests}}
-        </mj-text>
-
         <!-- Price Summary -->
         <mj-divider border-color="#e2e8f0" border-width="1px" padding="16px 0 12px" />
 
