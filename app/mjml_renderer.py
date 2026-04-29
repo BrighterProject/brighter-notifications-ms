@@ -11,7 +11,7 @@ TEMPLATES_DIR = Path(__file__).parent / "templates" / "emails"
 _MJML_BIN = Path(__file__).parent.parent / "node_modules" / ".bin" / "mjml"
 _MJML_CMD = str(_MJML_BIN) if _MJML_BIN.exists() else "mjml"
 
-# Compiled at module load: template name → (html_with_placeholders, subject)
+# Populated by warm_template_cache() on app startup — not at import time.
 _TEMPLATE_CACHE: dict[str, tuple[str, str]] = {}
 
 
@@ -95,9 +95,14 @@ def _build_template_cache() -> dict[str, tuple[str, str]]:
     return cache
 
 
-# Compile all templates once at module load.
-# Fails fast if the mjml CLI is unavailable or a template is invalid MJML.
-_TEMPLATE_CACHE = _build_template_cache()
+def warm_template_cache() -> None:
+    """Compile all MJML templates and populate the cache.
+
+    Call this once from the application startup event. Raises RuntimeError
+    if mjml CLI is unavailable or any template fails to compile.
+    """
+    global _TEMPLATE_CACHE
+    _TEMPLATE_CACHE = _build_template_cache()
 
 
 def render_mjml_template(

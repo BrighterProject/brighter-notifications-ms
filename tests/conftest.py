@@ -7,9 +7,15 @@ from __future__ import annotations
 import pytest
 from httpx import ASGITransport, AsyncClient
 
+from app.mjml_renderer import warm_template_cache
 from main import application
 
 from .factories import make_admin, make_user
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _warm_mjml_cache():
+    warm_template_cache()
 
 
 def _inject_user_headers(user: dict) -> dict[str, str]:
