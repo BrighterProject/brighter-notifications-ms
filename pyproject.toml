@@ -5,13 +5,12 @@ description = "Notifications microservice for the BrighterProject platform"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "aerich>=0.8.2",
     "fastapi[standard]>=0.112.4",
     "loguru>=0.7.3",
     "ms-core",
     "pydantic>=2.11.7",
     "resend>=2.0.0",
-    "tortoise-orm[asyncpg]>=0.21.7",
+    "tortoise-orm[asyncpg]>=1.1.7",
 ]
 
 [dependency-groups]
@@ -44,7 +43,5 @@ reportInvalidTypeForm = "none"
 [tool.uv.sources]
 ms-core = { url = "https://github.com/HexChap/MSCore/archive/refs/heads/master.zip" }
 
-[tool.aerich]
-tortoise_orm = "main.tortoise_conf"
-location = "./migrations"
-src_folder = "./."
+[tool.tortoise]
+tortoise_orm = "main.TORTOISE_ORM"
