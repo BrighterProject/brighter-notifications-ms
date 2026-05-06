@@ -1,0 +1,158 @@
+<mjml lang="bg" dir="ltr">
+  <mj-head>
+    <mj-title>Резервацията е потвърдена - Brighter</mj-title>
+    <mj-preview>Вашата резервация е потвърдена! Започнете да планирате престоя си</mj-preview>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Inter, Arial, sans-serif" />
+      <mj-text padding="0" line-height="1.6" color="#1e293b" />
+      <mj-button font-weight="600" border-radius="6px" inner-padding="12px 28px" />
+      <mj-class name="heading-1" font-size="32px" font-weight="700" color="#0f172a" />
+      <mj-class name="heading-2" font-size="20px" font-weight="600" color="#0f172a" />
+      <mj-class name="body-text" font-size="14px" color="#475569" />
+      <mj-class name="footer-text" font-size="12px" color="#94a3b8" />
+    </mj-attributes>
+    <mj-raw>
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+    </mj-raw>
+    <mj-style inline="inline">
+      .dark-logo { display: none !important; }
+      .success-badge { display: inline-block; background: #16a34a; color: white; padding: 8px 16px; border-radius: 24px; font-size: 12px; font-weight: 600; }
+    </mj-style>
+    <mj-style>
+      @media (prefers-color-scheme: dark) {
+        .light-logo { display: none !important; }
+        .dark-logo { display: block !important; }
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f8fafc">
+    <!-- Header -->
+    <mj-section padding="20px 0" background-color="#ffffff">
+      <mj-column padding="20px">
+        <mj-text mj-class="heading-2" color="#2563eb">
+          Brighter
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#16a34a" padding="40px 20px">
+      <mj-column padding="0">
+        <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
+          ✓ Резервацията е потвърдена
+        </mj-text>
+        <mj-text mj-class="body-text" color="#dcfce7" align="center" padding="12px 20px 0">
+          Чудесни новини! Вашата резервация е потвърдена. Очакваме ви с нетърпение.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Confirmation Details -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 20px">
+          Вашата резервация
+        </mj-text>
+
+        <!-- Booking Reference -->
+        <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
+          <strong>Номер на потвърждение:</strong><br />
+          {{booking_id}}
+        </mj-text>
+
+        <!-- Property Details -->
+        <mj-text mj-class="body-text" padding="12px 0">
+          <strong>Имот:</strong><br />
+          {{property_name}}
+        </mj-text>
+
+        <!-- Dates -->
+        <mj-text mj-class="body-text" padding="12px 0">
+          <strong>Настаняване:</strong><br />
+          {{checkin_display}}
+        </mj-text>
+
+        <mj-text mj-class="body-text" padding="12px 0">
+          <strong>Напускане:</strong><br />
+          {{checkout_display}}
+        </mj-text>
+
+        <!-- Price Summary -->
+        <mj-divider border-color="#e2e8f0" border-width="1px" padding="16px 0 12px" />
+
+        <mj-text mj-class="body-text" padding="0" font-weight="600">
+          {{currency}} {{total_price}} за {{num_nights}} нощувки
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- What to Expect -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f0fdf4" border-left="4px solid #16a34a">
+        <mj-text mj-class="heading-2" padding="0 0 12px" color="#15803d">
+          Какво да очаквате
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          <strong>Преди настаняване:</strong> Ще получите код за настаняване и данни за имота 24 часа преди пристигането.
+        </mj-text>
+        <mj-text mj-class="body-text" padding="12px 0">
+          <strong>Правила на имота:</strong> Моля, прегледайте правилата на имота и местните насоки.
+        </mj-text>
+        <mj-text mj-class="body-text" padding="12px 0">
+          <strong>Поддръжка:</strong> Нашият екип е на разположение 24/7, ако имате въпроси.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Quick Links -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 12px">
+          Полезни връзки
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          <a href="{{view_booking_url}}" style="color:#2563eb; text-decoration:none;">Виж детайлите за резервацията</a> • <a href="{{property_url}}" style="color:#2563eb; text-decoration:none;">Информация за имота</a>
+        </mj-text>
+        <mj-text mj-class="body-text" padding="8px 0 0">
+          <a href="{{contact_owner_url}}" style="color:#2563eb; text-decoration:none;">Свържи се със собственика</a> • <a href="{{house_rules_url}}" style="color:#2563eb; text-decoration:none;">Правила на имота</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA Button -->
+    <mj-section padding="20px">
+      <mj-column>
+        <mj-button href="{{view_booking_url}}" background-color="#16a34a" color="#ffffff" align="center" padding="16px">
+          Вижте вашата резервация
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Support -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#f1f5f9">
+        <mj-text mj-class="body-text" padding="0" color="#64748b">
+          Имате въпроси? Нашият екип за поддръжка е тук 24/7.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Център за помощ</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
+      <mj-column padding="20px">
+        <mj-text mj-class="footer-text" padding="0">
+          © 2026 Brighter.BG. Всички права запазени.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0">
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

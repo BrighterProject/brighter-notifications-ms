@@ -73,7 +73,7 @@ async def dispatch_notification(payload: DispatchRequest) -> NotificationRespons
 
     This is the preferred endpoint for other microservices to call.
     """
-    subject, html = email_templates.render(payload.notification_type, payload.data)
+    subject, html = email_templates.render(payload.notification_type, payload.data, payload.locale)
     template = payload.notification_type.value
 
     params: resend.Emails.SendParams = {

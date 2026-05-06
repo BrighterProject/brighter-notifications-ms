@@ -54,3 +54,4 @@ class DispatchRequest(BaseModel):
     to: str
     data: dict[str, Any] = {}
     triggered_by: str | None = None
+    locale: str | None = None

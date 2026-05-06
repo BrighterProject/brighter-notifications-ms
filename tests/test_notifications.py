@@ -183,6 +183,75 @@ class TestDispatchNotification:
         assert "payment" in sent_params["subject"].lower()
 
     @pytest.mark.asyncio
+    async def test_dispatch_booking_created_guest_bg_locale(self, admin_client):
+        client = await admin_client()
+
+        mock_resend_result = {"id": "msg_bg001"}
+        mock_notification = NotificationResponse(**{
+            **notification_response(resend_id="msg_bg001", template="booking_created_guest"),
+            "id": uuid4(),
+        })
+
+        with (
+            patch("app.routers.notifications.resend") as mock_resend,
+            patch("app.routers.notifications.notification_crud") as mock_crud,
+        ):
+            mock_resend.Emails.send.return_value = mock_resend_result
+            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+
+            resp = await client.post(DISPATCH_URL, json={
+                "notification_type": "booking_created_guest",
+                "to": "guest@example.com",
+                "data": {
+                    "property_name": "Уютен апартамент",
+                    "start_date": "2025-06-01",
+                    "end_date": "2025-06-05",
+                },
+                "locale": "bg",
+                "triggered_by": "bookings-ms",
+            })
+
+        assert resp.status_code == 201
+        call_args = mock_resend.Emails.send.call_args
+        sent_params = call_args[0][0]
+        assert sent_params["subject"] == "Получена резервация - Brighter"
+        assert "Уютен апартамент" in sent_params["html"]
+
+    @pytest.mark.asyncio
+    async def test_dispatch_unknown_locale_falls_back_to_english(self, admin_client):
+        client = await admin_client()
+
+        mock_resend_result = {"id": "msg_xx001"}
+        mock_notification = NotificationResponse(**{
+            **notification_response(resend_id="msg_xx001", template="booking_created_guest"),
+            "id": uuid4(),
+        })
+
+        with (
+            patch("app.routers.notifications.resend") as mock_resend,
+            patch("app.routers.notifications.notification_crud") as mock_crud,
+        ):
+            mock_resend.Emails.send.return_value = mock_resend_result
+            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+
+            resp = await client.post(DISPATCH_URL, json={
+                "notification_type": "booking_created_guest",
+                "to": "guest@example.com",
+                "data": {
+                    "property_name": "Cozy Apartment",
+                    "start_date": "2025-06-01",
+                    "end_date": "2025-06-05",
+                },
+                "locale": "fr",
+                "triggered_by": "bookings-ms",
+            })
+
+        assert resp.status_code == 201
+        call_args = mock_resend.Emails.send.call_args
+        sent_params = call_args[0][0]
+        assert sent_params["subject"] == "Booking Received - Brighter"
+
+    @pytest.mark.asyncio
     async def test_dispatch_requires_admin_scope(self, client_factory):
         user = make_user(scopes="bookings:read")
         client = await client_factory(user)

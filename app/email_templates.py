@@ -49,8 +49,12 @@ def _build_url_vars(data: dict[str, Any]) -> dict[str, str]:
     }
 
 
+_CHECKIN_FROM: dict[str, str] = {"bg": "от", "en": "from"}
+_CHECKOUT_BY: dict[str, str] = {"bg": "до", "en": "by"}
+
+
 def _build_computed_vars(
-    notification_type: NotificationType, data: dict[str, Any]
+    notification_type: NotificationType, data: dict[str, Any], locale: str = "en"
 ) -> dict[str, str]:
     """Build computed placeholder values that replace former {{#if}} conditionals.
 
@@ -60,6 +64,7 @@ def _build_computed_vars(
     Args:
         notification_type: Determines which computed vars are needed.
         data: Caller-supplied data dict.
+        locale: Two-letter locale code used to localise inline strings.
 
     Returns:
         Dict of computed placeholder names to substitution strings.
@@ -71,11 +76,13 @@ def _build_computed_vars(
         end_date = str(data.get("end_date", ""))
         check_in_time = data.get("check_in_time") or ""
         check_out_time = data.get("check_out_time") or ""
+        from_word = _CHECKIN_FROM.get(locale, _CHECKIN_FROM["en"])
+        by_word = _CHECKOUT_BY.get(locale, _CHECKOUT_BY["en"])
         computed["checkin_display"] = (
-            f"{start_date} from {check_in_time}" if check_in_time else start_date
+            f"{start_date} {from_word} {check_in_time}" if check_in_time else start_date
         )
         computed["checkout_display"] = (
-            f"{end_date} by {check_out_time}" if check_out_time else end_date
+            f"{end_date} {by_word} {check_out_time}" if check_out_time else end_date
         )
 
     if notification_type is NotificationType.PAYMENT_RECEIPT:
@@ -98,14 +105,36 @@ def _build_computed_vars(
     return computed
 
 
+def _resolve_template(base_name: str, locale: str) -> str:
+    """Return the localised template name if it exists, else the base.
+
+    Args:
+        base_name: Template stem without locale suffix (e.g. "booking_confirmed").
+        locale: Two-letter locale code (e.g. "bg", "en").
+
+    Returns:
+        Template stem to look up in the cache.
+    """
+    if locale == "bg":
+        candidate = f"{base_name}_bg"
+        from app.mjml_renderer import _TEMPLATE_CACHE  # noqa: PLC0415
+        if candidate in _TEMPLATE_CACHE:
+            return candidate
+    return base_name
+
+
 def render(
-    notification_type: NotificationType, data: dict[str, Any]
+    notification_type: NotificationType,
+    data: dict[str, Any],
+    locale: str | None = None,
 ) -> tuple[str, str]:
     """Render email content for a given notification type.
 
     Args:
         notification_type: The type of notification to render.
         data: Template variable values supplied by the caller.
+        locale: Two-letter locale code; "bg" uses Bulgarian templates,
+            everything else falls back to English.
 
     Returns:
         (subject, html) tuple.
@@ -116,12 +145,14 @@ def render(
     if notification_type not in _TEMPLATE_MAP:
         raise ValueError(f"Unknown notification type: {notification_type}")
 
-    template_name = _TEMPLATE_MAP[notification_type]
+    resolved_locale = locale if locale == "bg" else "en"
+    base_name = _TEMPLATE_MAP[notification_type]
+    template_name = _resolve_template(base_name, resolved_locale)
 
     # Merge order: url_vars < computed_vars < caller data (caller takes precedence)
     merged_data = {
         **_build_url_vars(data),
-        **_build_computed_vars(notification_type, data),
+        **_build_computed_vars(notification_type, data, resolved_locale),
         **data,
     }
 
