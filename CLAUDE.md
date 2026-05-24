@@ -148,6 +148,9 @@ tests/
 | `RESEND_API_KEY`     | `re_test_placeholder`                        | Resend API key                 |
 | `DEFAULT_FROM_EMAIL` | `Brighter.BG <noreply@brighter.bg>`      | Sender address                 |
 | `FRONTEND_BASE_URL`  | `http://localhost`                           | Frontend URL for email links   |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://otel-collector:4317` | OTLP gRPC endpoint |
+| `OTEL_SDK_DISABLED` | `false` | Set `true` to skip telemetry (CI / light dev) |
+| `LOG_COLORIZE` | `false` | Set `true` for ANSI-coloured logs in compose |
 
 ## Testing conventions
 
