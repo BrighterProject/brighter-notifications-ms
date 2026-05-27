@@ -70,7 +70,7 @@ def _extract_subject(html: str, template_name: str) -> str:
     match = re.search(r"<title[^>]*>([^<]+)</title>", html, re.IGNORECASE)
     if match:
         return match.group(1).strip()
-    return f"Notification from Brighter ({template_name})"
+    return f"Notification from SeasideHoliday ({template_name})"
 
 
 def _build_template_cache() -> dict[str, tuple[str, str]]:

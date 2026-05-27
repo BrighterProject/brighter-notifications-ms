@@ -1,6 +1,6 @@
 <mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>Имотът е одобрен - Brighter</mj-title>
+    <mj-title>Имотът е одобрен - Почивка на морето</mj-title>
     <mj-preview>Поздравления! Вашият имот вече е активен</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
@@ -32,7 +32,7 @@
     <mj-section padding="20px 0" background-color="#ffffff">
       <mj-column padding="20px">
         <mj-text mj-class="heading-2" color="#2563eb">
-          Brighter
+          Почивка на морето
         </mj-text>
       </mj-column>
     </mj-section>
@@ -53,10 +53,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f0fdf4" border-left="4px solid #16a34a">
         <mj-text mj-class="heading-2" padding="0 0 12px" color="#15803d">
-          🎉 Добре дошли в общността на домакините на Brighter!
+          🎉 Добре дошли в общността на домакините на Почивка на морето!
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          Вашият имот беше внимателно прегледан и одобрен от нашия екип. Вече е видим за гостите, които търсят в Brighter, и е готов да получава резервации.
+          Вашият имот беше внимателно прегледан и одобрен от нашия екип. Вече е видим за гостите, които търсят в Почивка на морето, и е готов да получава резервации.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -207,7 +207,7 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter.BG. Всички права запазени.
+          © 2026 Почивка на морето. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
           <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>

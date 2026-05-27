@@ -1,6 +1,6 @@
 <mjml lang="en" dir="ltr">
   <mj-head>
-    <mj-title>Property Approved - Brighter</mj-title>
+    <mj-title>Property Approved - SeasideHoliday</mj-title>
     <mj-preview>Congratulations! Your property is now live</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
@@ -32,7 +32,7 @@
     <mj-section padding="20px 0" background-color="#ffffff">
       <mj-column padding="20px">
         <mj-text mj-class="heading-2" color="#2563eb">
-          Brighter
+          SeasideHoliday
         </mj-text>
       </mj-column>
     </mj-section>
@@ -53,10 +53,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f0fdf4" border-left="4px solid #16a34a">
         <mj-text mj-class="heading-2" padding="0 0 12px" color="#15803d">
-          🎉 Welcome to the Brighter Host Community!
+          🎉 Welcome to the SeasideHoliday Host Community!
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          Your property has been thoroughly reviewed and approved by our team. It is now visible to guests searching on Brighter and ready to receive bookings.
+          Your property has been thoroughly reviewed and approved by our team. It is now visible to guests searching on SeasideHoliday and ready to receive bookings.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -207,7 +207,7 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter.BG. All rights reserved.
+          © 2026 SeasideHoliday. All rights reserved.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
           <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
