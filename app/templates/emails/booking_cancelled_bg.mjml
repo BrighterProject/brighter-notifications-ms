@@ -1,6 +1,6 @@
 <mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>Резервацията е отменена - Почивка на морето</mj-title>
+    <mj-title>Резервацията е отменена - Brighter</mj-title>
     <mj-preview>Вашата резервация е отменена</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
@@ -32,7 +32,7 @@
     <mj-section padding="20px 0" background-color="#ffffff">
       <mj-column padding="20px">
         <mj-text mj-class="heading-2" color="#2563eb">
-          Почивка на морето
+          Brighter
         </mj-text>
       </mj-column>
     </mj-section>
@@ -107,7 +107,7 @@
           Какво сега?
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          Надяваме се отново да изберете Почивка на морето за вашите бъдещи пътувания. Разгледайте други имоти, които отговарят на вашите дати и бюджет.
+          Надяваме се отново да изберете Brighter за вашите бъдещи пътувания. Разгледайте други имоти, които отговарят на вашите дати и бюджет.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -137,7 +137,7 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Почивка на морето. Всички права запазени.
+          © 2026 Brighter. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
           <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>

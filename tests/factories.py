@@ -22,8 +22,7 @@ def make_admin() -> dict:
         "id": str(uuid4()),
         "username": "admin",
         "scopes": (
-            "admin:scopes admin:notifications"
-            " admin:notifications:read admin:notifications:write"
+            "admin:scopes admin:notifications admin:notifications:read admin:notifications:write"
         ),
     }
 

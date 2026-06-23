@@ -3,7 +3,7 @@ from uuid import uuid4
 
 import pytest
 
-from app.schemas import NotificationResponse, NotificationType
+from app.schemas import NotificationResponse
 from tests.factories import make_user, notification_response
 
 SEND_URL = "/notifications/send"
@@ -22,10 +22,12 @@ class TestSendEmail:
         client = await admin_client()
 
         mock_resend_result = {"id": "msg_abc123"}
-        mock_notification = NotificationResponse(**{
-            **notification_response(resend_id="msg_abc123"),
-            "id": uuid4(),
-        })
+        mock_notification = NotificationResponse(
+            **{
+                **notification_response(resend_id="msg_abc123"),
+                "id": uuid4(),
+            }
+        )
 
         with (
             patch("app.routers.notifications.resend") as mock_resend,
@@ -34,13 +36,16 @@ class TestSendEmail:
             mock_resend.Emails.send.return_value = mock_resend_result
             mock_crud.log_sent = AsyncMock(return_value=mock_notification)
 
-            resp = await client.post(SEND_URL, json={
-                "to": "user@example.com",
-                "subject": "Booking Confirmed",
-                "html": "<h1>Your booking is confirmed!</h1>",
-                "template": "booking_confirmed",
-                "triggered_by": "bookings-ms",
-            })
+            resp = await client.post(
+                SEND_URL,
+                json={
+                    "to": "user@example.com",
+                    "subject": "Booking Confirmed",
+                    "html": "<h1>Your booking is confirmed!</h1>",
+                    "template": "booking_confirmed",
+                    "triggered_by": "bookings-ms",
+                },
+            )
 
         assert resp.status_code == 201
         data = resp.json()
@@ -54,10 +59,12 @@ class TestSendEmail:
     async def test_send_email_resend_failure_logs_error(self, admin_client):
         client = await admin_client()
 
-        mock_notification = NotificationResponse(**{
-            **notification_response(status="failed", resend_id=None, error="API error"),
-            "id": uuid4(),
-        })
+        mock_notification = NotificationResponse(
+            **{
+                **notification_response(status="failed", resend_id=None, error="API error"),
+                "id": uuid4(),
+            }
+        )
 
         with (
             patch("app.routers.notifications.resend") as mock_resend,
@@ -66,11 +73,14 @@ class TestSendEmail:
             mock_resend.Emails.send.side_effect = Exception("API error")
             mock_crud.log_failed = AsyncMock(return_value=mock_notification)
 
-            resp = await client.post(SEND_URL, json={
-                "to": "user@example.com",
-                "subject": "Test",
-                "html": "<p>test</p>",
-            })
+            resp = await client.post(
+                SEND_URL,
+                json={
+                    "to": "user@example.com",
+                    "subject": "Test",
+                    "html": "<p>test</p>",
+                },
+            )
 
         assert resp.status_code == 201
         data = resp.json()
@@ -83,11 +93,14 @@ class TestSendEmail:
         user = make_user(scopes="bookings:read")
         client = await client_factory(user)
 
-        resp = await client.post(SEND_URL, json={
-            "to": "user@example.com",
-            "subject": "Test",
-            "html": "<p>test</p>",
-        })
+        resp = await client.post(
+            SEND_URL,
+            json={
+                "to": "user@example.com",
+                "subject": "Test",
+                "html": "<p>test</p>",
+            },
+        )
 
         assert resp.status_code == 403
 
@@ -95,11 +108,14 @@ class TestSendEmail:
     async def test_send_email_no_auth_returns_422(self, anon_app):
         client = await anon_app()
 
-        resp = await client.post(SEND_URL, json={
-            "to": "user@example.com",
-            "subject": "Test",
-            "html": "<p>test</p>",
-        })
+        resp = await client.post(
+            SEND_URL,
+            json={
+                "to": "user@example.com",
+                "subject": "Test",
+                "html": "<p>test</p>",
+            },
+        )
 
         assert resp.status_code == 422
 
@@ -115,10 +131,12 @@ class TestDispatchNotification:
         client = await admin_client()
 
         mock_resend_result = {"id": "msg_xyz789"}
-        mock_notification = NotificationResponse(**{
-            **notification_response(resend_id="msg_xyz789", template="booking_created_guest"),
-            "id": uuid4(),
-        })
+        mock_notification = NotificationResponse(
+            **{
+                **notification_response(resend_id="msg_xyz789", template="booking_created_guest"),
+                "id": uuid4(),
+            }
+        )
 
         with (
             patch("app.routers.notifications.resend") as mock_resend,
@@ -127,16 +145,19 @@ class TestDispatchNotification:
             mock_resend.Emails.send.return_value = mock_resend_result
             mock_crud.log_sent = AsyncMock(return_value=mock_notification)
 
-            resp = await client.post(DISPATCH_URL, json={
-                "notification_type": "booking_created_guest",
-                "to": "guest@example.com",
-                "data": {
-                    "property_name": "Cozy Apartment",
-                    "start_date": "2025-06-01",
-                    "end_date": "2025-06-05",
+            resp = await client.post(
+                DISPATCH_URL,
+                json={
+                    "notification_type": "booking_created_guest",
+                    "to": "guest@example.com",
+                    "data": {
+                        "property_name": "Cozy Apartment",
+                        "start_date": "2025-06-01",
+                        "end_date": "2025-06-05",
+                    },
+                    "triggered_by": "bookings-ms",
                 },
-                "triggered_by": "bookings-ms",
-            })
+            )
 
         assert resp.status_code == 201
         data = resp.json()
@@ -155,10 +176,12 @@ class TestDispatchNotification:
         client = await admin_client()
 
         mock_resend_result = {"id": "msg_abc456"}
-        mock_notification = NotificationResponse(**{
-            **notification_response(resend_id="msg_abc456", template="payment_receipt"),
-            "id": uuid4(),
-        })
+        mock_notification = NotificationResponse(
+            **{
+                **notification_response(resend_id="msg_abc456", template="payment_receipt"),
+                "id": uuid4(),
+            }
+        )
 
         with (
             patch("app.routers.notifications.resend") as mock_resend,
@@ -167,11 +190,14 @@ class TestDispatchNotification:
             mock_resend.Emails.send.return_value = mock_resend_result
             mock_crud.log_sent = AsyncMock(return_value=mock_notification)
 
-            resp = await client.post(DISPATCH_URL, json={
-                "notification_type": "payment_receipt",
-                "to": "customer@example.com",
-                "triggered_by": "payments-ms",
-            })
+            resp = await client.post(
+                DISPATCH_URL,
+                json={
+                    "notification_type": "payment_receipt",
+                    "to": "customer@example.com",
+                    "triggered_by": "payments-ms",
+                },
+            )
 
         assert resp.status_code == 201
         data = resp.json()
@@ -187,10 +213,12 @@ class TestDispatchNotification:
         client = await admin_client()
 
         mock_resend_result = {"id": "msg_bg001"}
-        mock_notification = NotificationResponse(**{
-            **notification_response(resend_id="msg_bg001", template="booking_created_guest"),
-            "id": uuid4(),
-        })
+        mock_notification = NotificationResponse(
+            **{
+                **notification_response(resend_id="msg_bg001", template="booking_created_guest"),
+                "id": uuid4(),
+            }
+        )
 
         with (
             patch("app.routers.notifications.resend") as mock_resend,
@@ -199,17 +227,20 @@ class TestDispatchNotification:
             mock_resend.Emails.send.return_value = mock_resend_result
             mock_crud.log_sent = AsyncMock(return_value=mock_notification)
 
-            resp = await client.post(DISPATCH_URL, json={
-                "notification_type": "booking_created_guest",
-                "to": "guest@example.com",
-                "data": {
-                    "property_name": "Уютен апартамент",
-                    "start_date": "2025-06-01",
-                    "end_date": "2025-06-05",
+            resp = await client.post(
+                DISPATCH_URL,
+                json={
+                    "notification_type": "booking_created_guest",
+                    "to": "guest@example.com",
+                    "data": {
+                        "property_name": "Уютен апартамент",
+                        "start_date": "2025-06-01",
+                        "end_date": "2025-06-05",
+                    },
+                    "locale": "bg",
+                    "triggered_by": "bookings-ms",
                 },
-                "locale": "bg",
-                "triggered_by": "bookings-ms",
-            })
+            )
 
         assert resp.status_code == 201
         call_args = mock_resend.Emails.send.call_args
@@ -222,10 +253,12 @@ class TestDispatchNotification:
         client = await admin_client()
 
         mock_resend_result = {"id": "msg_xx001"}
-        mock_notification = NotificationResponse(**{
-            **notification_response(resend_id="msg_xx001", template="booking_created_guest"),
-            "id": uuid4(),
-        })
+        mock_notification = NotificationResponse(
+            **{
+                **notification_response(resend_id="msg_xx001", template="booking_created_guest"),
+                "id": uuid4(),
+            }
+        )
 
         with (
             patch("app.routers.notifications.resend") as mock_resend,
@@ -234,17 +267,20 @@ class TestDispatchNotification:
             mock_resend.Emails.send.return_value = mock_resend_result
             mock_crud.log_sent = AsyncMock(return_value=mock_notification)
 
-            resp = await client.post(DISPATCH_URL, json={
-                "notification_type": "booking_created_guest",
-                "to": "guest@example.com",
-                "data": {
-                    "property_name": "Cozy Apartment",
-                    "start_date": "2025-06-01",
-                    "end_date": "2025-06-05",
+            resp = await client.post(
+                DISPATCH_URL,
+                json={
+                    "notification_type": "booking_created_guest",
+                    "to": "guest@example.com",
+                    "data": {
+                        "property_name": "Cozy Apartment",
+                        "start_date": "2025-06-01",
+                        "end_date": "2025-06-05",
+                    },
+                    "locale": "fr",
+                    "triggered_by": "bookings-ms",
                 },
-                "locale": "fr",
-                "triggered_by": "bookings-ms",
-            })
+            )
 
         assert resp.status_code == 201
         call_args = mock_resend.Emails.send.call_args
@@ -256,10 +292,13 @@ class TestDispatchNotification:
         user = make_user(scopes="bookings:read")
         client = await client_factory(user)
 
-        resp = await client.post(DISPATCH_URL, json={
-            "notification_type": "payment_receipt",
-            "to": "user@example.com",
-        })
+        resp = await client.post(
+            DISPATCH_URL,
+            json={
+                "notification_type": "payment_receipt",
+                "to": "user@example.com",
+            },
+        )
 
         assert resp.status_code == 403
 
@@ -275,10 +314,12 @@ class TestListNotifications:
         client = await admin_client()
 
         mock_items = [
-            NotificationResponse(**{
-                **notification_response(),
-                "id": uuid4(),
-            })
+            NotificationResponse(
+                **{
+                    **notification_response(),
+                    "id": uuid4(),
+                }
+            )
             for _ in range(3)
         ]
 

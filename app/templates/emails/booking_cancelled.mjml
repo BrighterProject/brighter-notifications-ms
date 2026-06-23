@@ -1,6 +1,6 @@
 <mjml lang="en" dir="ltr">
   <mj-head>
-    <mj-title>Booking Cancelled - SeasideHoliday</mj-title>
+    <mj-title>Booking Cancelled - Brighter</mj-title>
     <mj-preview>Your booking has been cancelled</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
@@ -32,7 +32,7 @@
     <mj-section padding="20px 0" background-color="#ffffff">
       <mj-column padding="20px">
         <mj-text mj-class="heading-2" color="#2563eb">
-          SeasideHoliday
+          Brighter
         </mj-text>
       </mj-column>
     </mj-section>
@@ -107,7 +107,7 @@
           What Now?
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          We hope you'll consider SeasideHoliday for your future travel plans. Browse other properties that match your dates and budget.
+          We hope you'll consider Brighter for your future travel plans. Browse other properties that match your dates and budget.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -137,7 +137,7 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 SeasideHoliday. All rights reserved.
+          © 2026 Brighter. All rights reserved.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
           <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>

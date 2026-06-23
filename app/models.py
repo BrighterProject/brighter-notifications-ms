@@ -28,6 +28,6 @@ class Notification(Model):
     # Who/what triggered this notification
     triggered_by = fields.CharField(max_length=100, null=True)  # e.g. "bookings-ms"
 
-    class Meta:  # type: ignore
+    class Meta:
         table = "notifications"
         ordering = ["-created_at"]

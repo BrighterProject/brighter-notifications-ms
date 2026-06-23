@@ -32,7 +32,7 @@ async def send_email(payload: SendEmailRequest) -> NotificationResponse:
 
     try:
         result = resend.Emails.send(params)
-        resend_id = result["id"] if isinstance(result, dict) else result.id
+        resend_id = result["id"] if isinstance(result, dict) else result.id  # type: ignore
         logger.info(
             "Email sent to={} subject={!r} resend_id={}",
             payload.to,
@@ -85,7 +85,7 @@ async def dispatch_notification(payload: DispatchRequest) -> NotificationRespons
 
     try:
         result = resend.Emails.send(params)
-        resend_id = result["id"] if isinstance(result, dict) else result.id
+        resend_id = result["id"] if isinstance(result, dict) else result.id  # type: ignore
         logger.info(
             "Email sent to={} subject={!r} resend_id={}",
             payload.to,
