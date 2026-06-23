@@ -16,9 +16,7 @@ class NotificationStatus(StrEnum):
 class Notification(Model):
     id = fields.UUIDField(primary_key=True)
 
-    channel = fields.CharEnumField(
-        NotificationChannel, default=NotificationChannel.EMAIL
-    )
+    channel = fields.CharEnumField(NotificationChannel, default=NotificationChannel.EMAIL)
     recipient = fields.CharField(max_length=255)  # email address
     subject = fields.CharField(max_length=500)
     template = fields.CharField(max_length=100)  # e.g. "booking_confirmed"

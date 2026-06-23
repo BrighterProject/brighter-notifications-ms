@@ -26,7 +26,6 @@ def _build_url_vars(data: dict[str, Any]) -> dict[str, str]:
         Dict of URL variable names to fully-qualified URL strings.
     """
     base = settings.frontend_base_url.rstrip("/")
-    booking_id = data.get("booking_id", "")
     property_id = data.get("property_id", "")
     property_suffix = f"/{property_id}" if property_id else ""
     return {
@@ -90,17 +89,25 @@ def _build_computed_vars(
         cleaning_fee = data.get("cleaning_fee")
         service_fee = data.get("service_fee")
         computed["cleaning_fee_row"] = (
-            f'<tr style="border-bottom: 1px solid #e2e8f0;">'
-            f'<td style="padding: 12px 12px 12px 0; color: #475569;">Cleaning Fee</td>'
-            f'<td style="padding: 12px 12px 12px; text-align: right; color: #475569;">'
-            f"{currency} {cleaning_fee}</td></tr>"
-        ) if cleaning_fee else ""
+            (
+                f'<tr style="border-bottom: 1px solid #e2e8f0;">'
+                f'<td style="padding: 12px 12px 12px 0; color: #475569;">Cleaning Fee</td>'
+                f'<td style="padding: 12px 12px 12px; text-align: right; color: #475569;">'
+                f"{currency} {cleaning_fee}</td></tr>"
+            )
+            if cleaning_fee
+            else ""
+        )
         computed["service_fee_row"] = (
-            f'<tr style="border-bottom: 1px solid #e2e8f0;">'
-            f'<td style="padding: 12px 12px 12px 0; color: #475569;">Service Fee</td>'
-            f'<td style="padding: 12px 12px 12px; text-align: right; color: #475569;">'
-            f"{currency} {service_fee}</td></tr>"
-        ) if service_fee else ""
+            (
+                f'<tr style="border-bottom: 1px solid #e2e8f0;">'
+                f'<td style="padding: 12px 12px 12px 0; color: #475569;">Service Fee</td>'
+                f'<td style="padding: 12px 12px 12px; text-align: right; color: #475569;">'
+                f"{currency} {service_fee}</td></tr>"
+            )
+            if service_fee
+            else ""
+        )
 
     return computed
 
@@ -118,6 +125,7 @@ def _resolve_template(base_name: str, locale: str) -> str:
     if locale == "bg":
         candidate = f"{base_name}_bg"
         from app.mjml_renderer import _TEMPLATE_CACHE  # noqa: PLC0415
+
         if candidate in _TEMPLATE_CACHE:
             return candidate
     return base_name

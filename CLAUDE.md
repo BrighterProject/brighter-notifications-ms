@@ -16,6 +16,8 @@ uv run <command>       # run in the venv
 
 ```bash
 uv run pytest                                                        # run tests
+uv run ruff check .                                                  # lint
+uv run ty check                                                      # type check
 uv run uvicorn main:application --host 0.0.0.0 --port 8004          # dev server
 ```
 
@@ -150,6 +152,7 @@ tests/
 | `FRONTEND_BASE_URL`  | `http://localhost`                           | Frontend URL for email links   |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://otel-collector:4317` | OTLP gRPC endpoint |
 | `OTEL_SDK_DISABLED` | `false` | Set `true` to skip telemetry (CI / light dev) |
+| `LOG_LEVEL`    | `INFO`  | Log verbosity — set `DEBUG` to see detailed dispatch logs |
 | `LOG_COLORIZE` | `false` | Set `true` for ANSI-coloured logs in compose |
 
 ## Testing conventions
@@ -168,3 +171,14 @@ tests/
 uv run tortoise -c main.TORTOISE_ORM makemigrations
 uv run tortoise -c main.TORTOISE_ORM migrate
 ```
+
+## Git & Branch Workflow
+
+- **Branch off `dev`**: all new work starts from `dev` — use `feat/<slug>` (or `fix/`, `chore/`, `test/`, `refactor/` as appropriate)
+- **PR targets `dev`**: never push directly to `dev` or `main`
+- **Approval required**: at least one human approval before merging
+- **CI must be green**: all checks must pass before merging
+- **Staging on green `dev`**: a passing `dev` triggers an automatic staging deployment
+- **`dev` → `main` is manual**: when `dev` is stable and ready to ship, open a PR from `dev` to `main` and merge manually
+- **Hotfixes bypass `dev`**: branch off `main` as `fix/<slug>`, PR directly to `main`, then backport to `dev`
+- **Branch cleanup**: delete merged branches periodically — keep them for a while for reference, then clean up
