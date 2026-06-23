@@ -5,6 +5,7 @@ description = "Notifications microservice for the BrighterProject platform"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "aiosmtplib>=5.1.2",
     "fastapi[standard]>=0.112.4",
     "loguru>=0.7.3",
     "ms-core",
