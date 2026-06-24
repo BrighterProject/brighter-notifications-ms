@@ -1,4 +1,5 @@
-from unittest.mock import AsyncMock, patch
+from contextlib import contextmanager
+from unittest.mock import AsyncMock, MagicMock, patch
 from uuid import uuid4
 
 import pytest
@@ -11,6 +12,30 @@ DISPATCH_URL = "/notifications/dispatch"
 LIST_URL = "/notifications/"
 
 
+@contextmanager
+def mock_delivery(*, message_id: str = "msg_abc123", error: Exception | None = None):
+    """Patch the transport + CRUD layer for a /send or /dispatch call.
+
+    Yields ``(transport_send, crud)`` so tests can assert how the email was built
+    and which CRUD logging path was taken.
+    """
+    transport = MagicMock()
+    if error is None:
+        transport.send = AsyncMock(return_value=message_id)
+    else:
+        transport.send = AsyncMock(side_effect=error)
+
+    crud = MagicMock()
+    crud.log_sent = AsyncMock()
+    crud.log_failed = AsyncMock()
+
+    with (
+        patch("app.routers.notifications.get_transport", return_value=transport),
+        patch("app.routers.notifications.notification_crud", crud),
+    ):
+        yield transport.send, crud
+
+
 # ---------------------------------------------------------------------------
 # POST /notifications/send
 # ---------------------------------------------------------------------------
@@ -21,20 +46,12 @@ class TestSendEmail:
     async def test_send_email_success(self, admin_client):
         client = await admin_client()
 
-        mock_resend_result = {"id": "msg_abc123"}
         mock_notification = NotificationResponse(
-            **{
-                **notification_response(resend_id="msg_abc123"),
-                "id": uuid4(),
-            }
+            **{**notification_response(resend_id="msg_abc123"), "id": uuid4()}
         )
 
-        with (
-            patch("app.routers.notifications.resend") as mock_resend,
-            patch("app.routers.notifications.notification_crud") as mock_crud,
-        ):
-            mock_resend.Emails.send.return_value = mock_resend_result
-            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+        with mock_delivery(message_id="msg_abc123") as (transport_send, crud):
+            crud.log_sent.return_value = mock_notification
 
             resp = await client.post(
                 SEND_URL,
@@ -52,11 +69,15 @@ class TestSendEmail:
         assert data["resend_id"] == "msg_abc123"
         assert data["status"] == "sent"
 
-        mock_resend.Emails.send.assert_called_once()
-        mock_crud.log_sent.assert_awaited_once()
+        transport_send.assert_awaited_once_with(
+            to="user@example.com",
+            subject="Booking Confirmed",
+            html="<h1>Your booking is confirmed!</h1>",
+        )
+        crud.log_sent.assert_awaited_once()
 
     @pytest.mark.asyncio
-    async def test_send_email_resend_failure_logs_error(self, admin_client):
+    async def test_send_email_transport_failure_logs_error(self, admin_client):
         client = await admin_client()
 
         mock_notification = NotificationResponse(
@@ -66,27 +87,19 @@ class TestSendEmail:
             }
         )
 
-        with (
-            patch("app.routers.notifications.resend") as mock_resend,
-            patch("app.routers.notifications.notification_crud") as mock_crud,
-        ):
-            mock_resend.Emails.send.side_effect = Exception("API error")
-            mock_crud.log_failed = AsyncMock(return_value=mock_notification)
+        with mock_delivery(error=Exception("API error")) as (_transport_send, crud):
+            crud.log_failed.return_value = mock_notification
 
             resp = await client.post(
                 SEND_URL,
-                json={
-                    "to": "user@example.com",
-                    "subject": "Test",
-                    "html": "<p>test</p>",
-                },
+                json={"to": "user@example.com", "subject": "Test", "html": "<p>test</p>"},
             )
 
         assert resp.status_code == 201
         data = resp.json()
         assert data["status"] == "failed"
         assert data["error"] == "API error"
-        mock_crud.log_failed.assert_awaited_once()
+        crud.log_failed.assert_awaited_once()
 
     @pytest.mark.asyncio
     async def test_send_email_requires_admin_scope(self, client_factory):
@@ -95,11 +108,7 @@ class TestSendEmail:
 
         resp = await client.post(
             SEND_URL,
-            json={
-                "to": "user@example.com",
-                "subject": "Test",
-                "html": "<p>test</p>",
-            },
+            json={"to": "user@example.com", "subject": "Test", "html": "<p>test</p>"},
         )
 
         assert resp.status_code == 403
@@ -110,11 +119,7 @@ class TestSendEmail:
 
         resp = await client.post(
             SEND_URL,
-            json={
-                "to": "user@example.com",
-                "subject": "Test",
-                "html": "<p>test</p>",
-            },
+            json={"to": "user@example.com", "subject": "Test", "html": "<p>test</p>"},
         )
 
         assert resp.status_code == 422
@@ -130,7 +135,6 @@ class TestDispatchNotification:
     async def test_dispatch_booking_created_guest(self, admin_client):
         client = await admin_client()
 
-        mock_resend_result = {"id": "msg_xyz789"}
         mock_notification = NotificationResponse(
             **{
                 **notification_response(resend_id="msg_xyz789", template="booking_created_guest"),
@@ -138,12 +142,8 @@ class TestDispatchNotification:
             }
         )
 
-        with (
-            patch("app.routers.notifications.resend") as mock_resend,
-            patch("app.routers.notifications.notification_crud") as mock_crud,
-        ):
-            mock_resend.Emails.send.return_value = mock_resend_result
-            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+        with mock_delivery(message_id="msg_xyz789") as (transport_send, crud):
+            crud.log_sent.return_value = mock_notification
 
             resp = await client.post(
                 DISPATCH_URL,
@@ -165,17 +165,15 @@ class TestDispatchNotification:
         assert data["template"] == "booking_created_guest"
         assert data["status"] == "sent"
 
-        call_args = mock_resend.Emails.send.call_args
-        sent_params = call_args[0][0]
+        sent = transport_send.call_args.kwargs
         # Subject comes from MJML template mj-title
-        assert sent_params["subject"] == "Booking Received - Brighter"
-        assert "Cozy Apartment" in sent_params["html"]
+        assert sent["subject"] == "Booking Received - Brighter"
+        assert "Cozy Apartment" in sent["html"]
 
     @pytest.mark.asyncio
     async def test_dispatch_payment_receipt(self, admin_client):
         client = await admin_client()
 
-        mock_resend_result = {"id": "msg_abc456"}
         mock_notification = NotificationResponse(
             **{
                 **notification_response(resend_id="msg_abc456", template="payment_receipt"),
@@ -183,12 +181,8 @@ class TestDispatchNotification:
             }
         )
 
-        with (
-            patch("app.routers.notifications.resend") as mock_resend,
-            patch("app.routers.notifications.notification_crud") as mock_crud,
-        ):
-            mock_resend.Emails.send.return_value = mock_resend_result
-            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+        with mock_delivery(message_id="msg_abc456") as (transport_send, crud):
+            crud.log_sent.return_value = mock_notification
 
             resp = await client.post(
                 DISPATCH_URL,
@@ -203,16 +197,12 @@ class TestDispatchNotification:
         data = resp.json()
         assert data["template"] == "payment_receipt"
         assert data["status"] == "sent"
-
-        call_args = mock_resend.Emails.send.call_args
-        sent_params = call_args[0][0]
-        assert "payment" in sent_params["subject"].lower()
+        assert "payment" in transport_send.call_args.kwargs["subject"].lower()
 
     @pytest.mark.asyncio
     async def test_dispatch_booking_created_guest_bg_locale(self, admin_client):
         client = await admin_client()
 
-        mock_resend_result = {"id": "msg_bg001"}
         mock_notification = NotificationResponse(
             **{
                 **notification_response(resend_id="msg_bg001", template="booking_created_guest"),
@@ -220,12 +210,8 @@ class TestDispatchNotification:
             }
         )
 
-        with (
-            patch("app.routers.notifications.resend") as mock_resend,
-            patch("app.routers.notifications.notification_crud") as mock_crud,
-        ):
-            mock_resend.Emails.send.return_value = mock_resend_result
-            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+        with mock_delivery(message_id="msg_bg001") as (transport_send, crud):
+            crud.log_sent.return_value = mock_notification
 
             resp = await client.post(
                 DISPATCH_URL,
@@ -243,16 +229,14 @@ class TestDispatchNotification:
             )
 
         assert resp.status_code == 201
-        call_args = mock_resend.Emails.send.call_args
-        sent_params = call_args[0][0]
-        assert sent_params["subject"] == "Получена резервация - Brighter"
-        assert "Уютен апартамент" in sent_params["html"]
+        sent = transport_send.call_args.kwargs
+        assert sent["subject"] == "Получена резервация - Brighter"
+        assert "Уютен апартамент" in sent["html"]
 
     @pytest.mark.asyncio
     async def test_dispatch_unknown_locale_falls_back_to_english(self, admin_client):
         client = await admin_client()
 
-        mock_resend_result = {"id": "msg_xx001"}
         mock_notification = NotificationResponse(
             **{
                 **notification_response(resend_id="msg_xx001", template="booking_created_guest"),
@@ -260,12 +244,8 @@ class TestDispatchNotification:
             }
         )
 
-        with (
-            patch("app.routers.notifications.resend") as mock_resend,
-            patch("app.routers.notifications.notification_crud") as mock_crud,
-        ):
-            mock_resend.Emails.send.return_value = mock_resend_result
-            mock_crud.log_sent = AsyncMock(return_value=mock_notification)
+        with mock_delivery(message_id="msg_xx001") as (transport_send, crud):
+            crud.log_sent.return_value = mock_notification
 
             resp = await client.post(
                 DISPATCH_URL,
@@ -283,9 +263,7 @@ class TestDispatchNotification:
             )
 
         assert resp.status_code == 201
-        call_args = mock_resend.Emails.send.call_args
-        sent_params = call_args[0][0]
-        assert sent_params["subject"] == "Booking Received - Brighter"
+        assert transport_send.call_args.kwargs["subject"] == "Booking Received - Brighter"
 
     @pytest.mark.asyncio
     async def test_dispatch_requires_admin_scope(self, client_factory):
@@ -294,10 +272,7 @@ class TestDispatchNotification:
 
         resp = await client.post(
             DISPATCH_URL,
-            json={
-                "notification_type": "payment_receipt",
-                "to": "user@example.com",
-            },
+            json={"notification_type": "payment_receipt", "to": "user@example.com"},
         )
 
         assert resp.status_code == 403
@@ -314,13 +289,7 @@ class TestListNotifications:
         client = await admin_client()
 
         mock_items = [
-            NotificationResponse(
-                **{
-                    **notification_response(),
-                    "id": uuid4(),
-                }
-            )
-            for _ in range(3)
+            NotificationResponse(**{**notification_response(), "id": uuid4()}) for _ in range(3)
         ]
 
         with patch("app.routers.notifications.notification_crud") as mock_crud:
@@ -329,8 +298,7 @@ class TestListNotifications:
             resp = await client.get(LIST_URL)
 
         assert resp.status_code == 200
-        data = resp.json()
-        assert len(data) == 3
+        assert len(resp.json()) == 3
 
     @pytest.mark.asyncio
     async def test_list_notifications_requires_admin(self, client_factory):
