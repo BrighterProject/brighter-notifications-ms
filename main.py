@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from ms_core import setup_app
 
 from app.logging import setup_logging
+from app.mjml_renderer import warm_template_cache
 from app.settings import db_url, resend_api_key
 from app.telemetry import setup_telemetry
 
@@ -36,3 +37,8 @@ application.add_middleware(
 
 setup_telemetry(application, "brighter-notifications-ms")
 setup_app(application, db_url, Path("app") / "routers", ["app.models"])
+
+
+@application.on_event("startup")
+async def _startup() -> None:
+    warm_template_cache()
