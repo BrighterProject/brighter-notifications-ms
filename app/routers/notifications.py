@@ -1,13 +1,43 @@
-import resend
 from fastapi import APIRouter, Depends, status
 from loguru import logger
 
-from app import email_templates, settings
+from app import email_templates
 from app.crud import notification_crud
 from app.deps import can_read_notifications, can_send_notification
+from app.email_transport import get_transport
 from app.schemas import DispatchRequest, NotificationResponse, SendEmailRequest
 
 router = APIRouter(prefix="/notifications", tags=["notifications"])
+
+
+async def _deliver(
+    *,
+    to: str,
+    subject: str,
+    html: str,
+    template: str,
+    triggered_by: str | None,
+) -> NotificationResponse:
+    """Send via the configured transport and log the outcome (sent or failed)."""
+    try:
+        message_id = await get_transport().send(to=to, subject=subject, html=html)
+        logger.info("Email sent to={} subject={!r} resend_id={}", to, subject, message_id)
+        return await notification_crud.log_sent(
+            recipient=to,
+            subject=subject,
+            template=template,
+            resend_id=message_id,
+            triggered_by=triggered_by,
+        )
+    except Exception as exc:
+        logger.error("Email send failed to={} error={}", to, exc)
+        return await notification_crud.log_failed(
+            recipient=to,
+            subject=subject,
+            template=template,
+            error=str(exc),
+            triggered_by=triggered_by,
+        )
 
 
 @router.post(
@@ -18,46 +48,18 @@ router = APIRouter(prefix="/notifications", tags=["notifications"])
 )
 async def send_email(payload: SendEmailRequest) -> NotificationResponse:
     """
-    Send an email via Resend and log the result.
+    Send an email via the configured transport and log the result.
 
     This is an internal endpoint — called by other services over the Docker
     network, protected by admin:notifications:write scope.
     """
-    params: resend.Emails.SendParams = {
-        "from": settings.default_from_email,
-        "to": [payload.to],
-        "subject": payload.subject,
-        "html": payload.html,
-    }
-
-    try:
-        result = resend.Emails.send(params)
-        resend_id = result["id"] if isinstance(result, dict) else result.id
-        logger.info(
-            "Email sent to={} subject={!r} resend_id={}",
-            payload.to,
-            payload.subject,
-            resend_id,
-        )
-
-        return await notification_crud.log_sent(
-            recipient=payload.to,
-            subject=payload.subject,
-            template=payload.template,
-            resend_id=resend_id,
-            triggered_by=payload.triggered_by,
-        )
-
-    except Exception as exc:
-        logger.error("Email send failed to={} error={}", payload.to, exc)
-
-        return await notification_crud.log_failed(
-            recipient=payload.to,
-            subject=payload.subject,
-            template=payload.template,
-            error=str(exc),
-            triggered_by=payload.triggered_by,
-        )
+    return await _deliver(
+        to=payload.to,
+        subject=payload.subject,
+        html=payload.html,
+        template=payload.template,
+        triggered_by=payload.triggered_by,
+    )
 
 
 @router.post(
@@ -73,44 +75,15 @@ async def dispatch_notification(payload: DispatchRequest) -> NotificationRespons
 
     This is the preferred endpoint for other microservices to call.
     """
-    subject, html = email_templates.render(payload.notification_type, payload.data)
-    template = payload.notification_type.value
+    subject, html = email_templates.render(payload.notification_type, payload.data, payload.locale)
 
-    params: resend.Emails.SendParams = {
-        "from": settings.default_from_email,
-        "to": [payload.to],
-        "subject": subject,
-        "html": html,
-    }
-
-    try:
-        result = resend.Emails.send(params)
-        resend_id = result["id"] if isinstance(result, dict) else result.id
-        logger.info(
-            "Email sent to={} subject={!r} resend_id={}",
-            payload.to,
-            subject,
-            resend_id,
-        )
-
-        return await notification_crud.log_sent(
-            recipient=payload.to,
-            subject=subject,
-            template=template,
-            resend_id=resend_id,
-            triggered_by=payload.triggered_by,
-        )
-
-    except Exception as exc:
-        logger.error("Email send failed to={} error={}", payload.to, exc)
-
-        return await notification_crud.log_failed(
-            recipient=payload.to,
-            subject=subject,
-            template=template,
-            error=str(exc),
-            triggered_by=payload.triggered_by,
-        )
+    return await _deliver(
+        to=payload.to,
+        subject=subject,
+        html=html,
+        template=payload.notification_type.value,
+        triggered_by=payload.triggered_by,
+    )
 
 
 @router.get(

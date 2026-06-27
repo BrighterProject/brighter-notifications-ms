@@ -1,7 +1,7 @@
-<mjml lang="en" dir="ltr">
+<mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>Booking Confirmed - Brighter</mj-title>
-    <mj-preview>Your booking is confirmed! Start planning your stay</mj-preview>
+    <mj-title>Резервацията е потвърдена - Brighter</mj-title>
+    <mj-preview>Вашата резервация е потвърдена! Започнете да планирате престоя си</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
       <mj-all font-family="Inter, Arial, sans-serif" />
@@ -42,10 +42,10 @@
     <mj-section background-color="#16a34a" padding="40px 20px">
       <mj-column padding="0">
         <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
-          ✓ Booking Confirmed
+          ✓ Резервацията е потвърдена
         </mj-text>
         <mj-text mj-class="body-text" color="#dcfce7" align="center" padding="12px 20px 0">
-          Great news! Your reservation is all set. We look forward to welcoming you.
+          Чудесни новини! Вашата резервация е потвърдена. Очакваме ви с нетърпение.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -54,29 +54,29 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 20px">
-          Your Reservation
+          Вашата резервация
         </mj-text>
 
         <!-- Booking Reference -->
         <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
-          <strong>Confirmation Number:</strong><br />
+          <strong>Номер на потвърждение:</strong><br />
           {{booking_id}}
         </mj-text>
 
         <!-- Property Details -->
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Property:</strong><br />
+          <strong>Имот:</strong><br />
           {{property_name}}
         </mj-text>
 
         <!-- Dates -->
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Check-in:</strong><br />
+          <strong>Настаняване:</strong><br />
           {{checkin_display}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Check-out:</strong><br />
+          <strong>Напускане:</strong><br />
           {{checkout_display}}
         </mj-text>
 
@@ -84,7 +84,7 @@
         <mj-divider border-color="#e2e8f0" border-width="1px" padding="16px 0 12px" />
 
         <mj-text mj-class="body-text" padding="0" font-weight="600">
-          {{currency}} {{total_price}} for {{num_nights}} nights
+          {{currency}} {{total_price}} за {{num_nights}} нощувки
         </mj-text>
       </mj-column>
     </mj-section>
@@ -93,16 +93,16 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f0fdf4" border-left="4px solid #16a34a">
         <mj-text mj-class="heading-2" padding="0 0 12px" color="#15803d">
-          What to Expect
+          Какво да очаквате
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <strong>Before Check-in:</strong> You'll receive a check-in code and property details 24 hours before arrival.
+          <strong>Преди настаняване:</strong> Ще получите код за настаняване и данни за имота 24 часа преди пристигането.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>House Rules:</strong> Please review the property's house rules and local guidelines.
+          <strong>Правила на имота:</strong> Моля, прегледайте правилата на имота и местните насоки.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Support:</strong> Our team is available 24/7 if you have any questions.
+          <strong>Поддръжка:</strong> Нашият екип е на разположение 24/7, ако имате въпроси.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -111,13 +111,13 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Helpful Links
+          Полезни връзки
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <a href="{{view_booking_url}}" style="color:#2563eb; text-decoration:none;">View Booking Details</a> • <a href="{{property_url}}" style="color:#2563eb; text-decoration:none;">Property Information</a>
+          <a href="{{view_booking_url}}" style="color:#2563eb; text-decoration:none;">Виж детайлите за резервацията</a> • <a href="{{property_url}}" style="color:#2563eb; text-decoration:none;">Информация за имота</a>
         </mj-text>
         <mj-text mj-class="body-text" padding="8px 0 0">
-          <a href="{{contact_owner_url}}" style="color:#2563eb; text-decoration:none;">Contact Property Owner</a> • <a href="{{house_rules_url}}" style="color:#2563eb; text-decoration:none;">House Rules</a>
+          <a href="{{contact_owner_url}}" style="color:#2563eb; text-decoration:none;">Свържи се със собственика</a> • <a href="{{house_rules_url}}" style="color:#2563eb; text-decoration:none;">Правила на имота</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -126,7 +126,7 @@
     <mj-section padding="20px">
       <mj-column>
         <mj-button href="{{view_booking_url}}" background-color="#16a34a" color="#ffffff" align="center" padding="16px">
-          View Your Booking
+          Вижте вашата резервация
         </mj-button>
       </mj-column>
     </mj-section>
@@ -135,10 +135,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          Have questions? Our support team is here 24/7.
+          Имате въпроси? Нашият екип за поддръжка е тук 24/7.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
-          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Център за помощ</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -147,10 +147,10 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter. All rights reserved.
+          © 2026 Brighter. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
-          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>
         </mj-text>
       </mj-column>
     </mj-section>

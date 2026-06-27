@@ -1,7 +1,7 @@
-<mjml lang="en" dir="ltr">
+<mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>Property Approved - Brighter</mj-title>
-    <mj-preview>Congratulations! Your property is now live</mj-preview>
+    <mj-title>Имотът е одобрен - Brighter</mj-title>
+    <mj-preview>Поздравления! Вашият имот вече е активен</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
       <mj-all font-family="Inter, Arial, sans-serif" />
@@ -41,10 +41,10 @@
     <mj-section background-color="#16a34a" padding="40px 20px">
       <mj-column padding="0">
         <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
-          ✓ Property Approved!
+          ✓ Имотът е одобрен!
         </mj-text>
         <mj-text mj-class="body-text" color="#dcfce7" align="center" padding="12px 20px 0">
-          Congratulations! Your property is live and ready to welcome guests
+          Поздравления! Вашият имот е активен и готов да посреща гости
         </mj-text>
       </mj-column>
     </mj-section>
@@ -53,10 +53,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f0fdf4" border-left="4px solid #16a34a">
         <mj-text mj-class="heading-2" padding="0 0 12px" color="#15803d">
-          🎉 Welcome to the Brighter Host Community!
+          🎉 Добре дошли в общността на домакините на Brighter!
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          Your property has been thoroughly reviewed and approved by our team. It is now visible to guests searching on Brighter and ready to receive bookings.
+          Вашият имот беше внимателно прегледан и одобрен от нашия екип. Вече е видим за гостите, които търсят в Brighter, и е готов да получава резервации.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -65,31 +65,31 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 16px">
-          Your Property
+          Вашият имот
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Property Name:</strong><br />
+          <strong>Име на имота:</strong><br />
           {{property_name}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Location:</strong><br />
-          {{property_city}}, Bulgaria
+          <strong>Местоположение:</strong><br />
+          {{property_city}}, България
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Property Type:</strong><br />
+          <strong>Тип имот:</strong><br />
           {{property_type}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Capacity:</strong><br />
-          Up to {{max_guests}} guests
+          <strong>Капацитет:</strong><br />
+          До {{max_guests}} гости
         </mj-text>
 
         <mj-text mj-class="body-text" padding="16px 0 0" font-weight="600" color="#16a34a">
-          Status: LIVE
+          Статус: АКТИВЕН
         </mj-text>
       </mj-column>
     </mj-section>
@@ -98,27 +98,27 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Getting Started
+          Първи стъпки
         </mj-text>
 
         <mj-text mj-class="body-text" padding="0">
-          <strong>1. Review Your Listing</strong><br />
-          Check your property page to ensure all information is correct and photos look great.
+          <strong>1. Прегледайте вашето обявление</strong><br />
+          Проверете страницата на имота си, за да се уверите, че цялата информация е вярна и снимките изглеждат чудесно.
         </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>2. Set Up Your Calendar</strong><br />
-          Mark dates as available or unavailable to control your booking availability.
+          <strong>2. Настройте вашия календар</strong><br />
+          Маркирайте датите като свободни или заети, за да контролирате наличността си за резервации.
         </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>3. Prepare for Guests</strong><br />
-          Set house rules, check-in/check-out times, and response time preferences.
+          <strong>3. Подгответе се за гости</strong><br />
+          Задайте правила на имота, часове за настаняване/напускане и предпочитания за време на отговор.
         </mj-text>
 
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>4. Respond to Inquiries</strong><br />
-          Reply promptly to booking requests to increase your approval rate.
+          <strong>4. Отговаряйте на запитвания</strong><br />
+          Отговаряйте бързо на заявките за резервация, за да повишите своя рейтинг на одобрение.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -127,21 +127,21 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f8fafc">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Quick Stats
+          Бърза статистика
         </mj-text>
 
         <mj-table>
           <tr style="text-align: center; border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px 8px; color: #0f172a; font-weight: 600;">Listing Quality</td>
-            <td style="padding: 12px 8px; color: #15803d; font-weight: 600;">Premium</td>
+            <td style="padding: 12px 8px; color: #0f172a; font-weight: 600;">Качество на обявлението</td>
+            <td style="padding: 12px 8px; color: #15803d; font-weight: 600;">Премиум</td>
           </tr>
           <tr style="text-align: center; border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px 8px; color: #0f172a; font-weight: 600;">Visibility</td>
-            <td style="padding: 12px 8px; color: #15803d; font-weight: 600;">Full</td>
+            <td style="padding: 12px 8px; color: #0f172a; font-weight: 600;">Видимост</td>
+            <td style="padding: 12px 8px; color: #15803d; font-weight: 600;">Пълна</td>
           </tr>
           <tr style="text-align: center;">
-            <td style="padding: 12px 8px; color: #0f172a; font-weight: 600;">Ready for Bookings</td>
-            <td style="padding: 12px 8px; color: #15803d; font-weight: 600;">Yes ✓</td>
+            <td style="padding: 12px 8px; color: #0f172a; font-weight: 600;">Готов за резервации</td>
+            <td style="padding: 12px 8px; color: #15803d; font-weight: 600;">Да ✓</td>
           </tr>
         </mj-table>
       </mj-column>
@@ -151,13 +151,13 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Helpful Resources
+          Полезни ресурси
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <a href="{{view_listing_url}}" style="color:#2563eb; text-decoration:none;">View Your Listing</a> • <a href="{{owner_dashboard_url}}" style="color:#2563eb; text-decoration:none;">Owner Dashboard</a>
+          <a href="{{view_listing_url}}" style="color:#2563eb; text-decoration:none;">Вижте вашето обявление</a> • <a href="{{owner_dashboard_url}}" style="color:#2563eb; text-decoration:none;">Табло за собственик</a>
         </mj-text>
         <mj-text mj-class="body-text" padding="8px 0 0">
-          <a href="{{host_guide_url}}" style="color:#2563eb; text-decoration:none;">Host Guide</a> • <a href="{{best_practices_url}}" style="color:#2563eb; text-decoration:none;">Best Practices</a>
+          <a href="{{host_guide_url}}" style="color:#2563eb; text-decoration:none;">Ръководство за домакини</a> • <a href="{{best_practices_url}}" style="color:#2563eb; text-decoration:none;">Най-добри практики</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -166,12 +166,12 @@
     <mj-section padding="20px">
       <mj-column padding="0 10px">
         <mj-button href="{{view_listing_url}}" background-color="#16a34a" color="#ffffff" align="center" width="100%">
-          View Your Listing
+          Вижте вашето обявление
         </mj-button>
       </mj-column>
       <mj-column padding="0 10px">
         <mj-button href="{{owner_dashboard_url}}" background-color="#2563eb" color="#ffffff" align="center" width="100%">
-          Go to Dashboard
+          Към таблото
         </mj-button>
       </mj-column>
     </mj-section>
@@ -180,13 +180,13 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="heading-2" padding="0 0 12px" color="#1e293b">
-          💡 Pro Tips for Success
+          💡 Професионални съвети за успех
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          • <strong>Respond within 12 hours</strong> to booking requests<br />
-          • <strong>Keep photos updated</strong> to showcase your property<br />
-          • <strong>Maintain house rules</strong> for guest safety and satisfaction<br />
-          • <strong>Be professional</strong> in all guest communications
+          • <strong>Отговаряйте в рамките на 12 часа</strong> на заявките за резервация<br />
+          • <strong>Поддържайте снимките актуални</strong>, за да покажете имота си<br />
+          • <strong>Спазвайте правилата на имота</strong> за безопасност и удовлетворение на гостите<br />
+          • <strong>Бъдете професионални</strong> във всяка комуникация с гостите
         </mj-text>
       </mj-column>
     </mj-section>
@@ -195,10 +195,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f8fafc">
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          Have questions about hosting? Our support team is ready to help.
+          Имате въпроси относно домакинстването? Нашият екип за поддръжка е готов да ви помогне.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
-          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Център за помощ</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -207,10 +207,10 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter. All rights reserved.
+          © 2026 Brighter. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
-          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>
         </mj-text>
       </mj-column>
     </mj-section>

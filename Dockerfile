@@ -8,13 +8,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # System deps (build tools + Postgres client libs for asyncpg + Node.js for MJML)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && \
+    apt-get install -y -qq --no-install-recommends \
       build-essential \
       libpq-dev \
       curl \
       nodejs \
-      npm && \
+      npm > /dev/null && \
     rm -rf /var/lib/apt/lists/*
 
 # Install uv
@@ -24,7 +24,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 COPY pyproject.toml uv.lock package.json package-lock.json ./
 
 # Install Node.js dependencies (MJML)
-RUN npm ci --production
+RUN npm ci --production --silent
 
 # Install Python dependencies (without project source — for better cache hit rate)
 RUN --mount=type=cache,target=/root/.cache/uv \

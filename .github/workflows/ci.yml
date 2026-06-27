@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
     branches: [main]
 
@@ -19,6 +19,10 @@ jobs:
           node-version: "20"
       - run: npm install -D mjml
       - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install -D mjml
       - run: uv sync --locked
       - run: uv run pytest --tb=short
 

@@ -255,6 +255,36 @@ class TestMJMLTemplates:
         assert "EUR 60" in html
         assert "Service Fee" not in html
 
+    def test_booking_cancelled_substitutes_refund_amount(self):
+        """A supplied refund_amount replaces its placeholder."""
+        data = {
+            "booking_id": "BK-001",
+            "property_name": "Test Apartment Sofia",
+            "start_date": "17 June 2026",
+            "end_date": "21 June 2026",
+            "cancelled_date": "16 June 2026",
+            "currency": "EUR",
+            "refund_amount": "150.00",
+        }
+        _, html = render(NotificationType.BOOKING_CANCELLED, data)
+        assert "EUR 150.00" in html
+        assert "{{refund_amount}}" not in html
+
+    def test_unsupplied_placeholder_is_stripped(self):
+        """Missing fields must not leak raw {{key}} tokens into the email."""
+        data = {
+            "booking_id": "BK-002",
+            "property_name": "Test Apartment Sofia",
+            "start_date": "17 June 2026",
+            "end_date": "21 June 2026",
+            "cancelled_date": "16 June 2026",
+            "currency": "EUR",
+            # refund_amount intentionally omitted
+        }
+        _, html = render(NotificationType.BOOKING_CANCELLED, data)
+        assert "{{" not in html
+        assert "refund_amount" not in html
+
     def test_invalid_notification_type(self):
         """Test that invalid notification types raise an error."""
         with pytest.raises(ValueError, match="Unknown notification type"):

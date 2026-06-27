@@ -1,7 +1,7 @@
-<mjml lang="en" dir="ltr">
+<mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>Payment Receipt - Brighter</mj-title>
-    <mj-preview>Payment received for your booking</mj-preview>
+    <mj-title>Разписка за плащане - Brighter</mj-title>
+    <mj-preview>Получено плащане за вашата резервация</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
       <mj-all font-family="Inter, Arial, sans-serif" />
@@ -41,10 +41,10 @@
     <mj-section background-color="#16a34a" padding="40px 20px">
       <mj-column padding="0">
         <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
-          ✓ Payment Received
+          ✓ Получено плащане
         </mj-text>
         <mj-text mj-class="body-text" color="#dcfce7" align="center" padding="12px 20px 0">
-          Thank you! Your payment has been processed successfully
+          Благодарим ви! Плащането ви е обработено успешно
         </mj-text>
       </mj-column>
     </mj-section>
@@ -53,15 +53,15 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 16px">
-          Payment Receipt
+          Разписка за плащане
         </mj-text>
 
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          <strong>Receipt #:</strong> {{receipt_id}}
+          <strong>Разписка №:</strong> {{receipt_id}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
-          <strong>Date:</strong> {{payment_date}}
+          <strong>Дата:</strong> {{payment_date}}
         </mj-text>
       </mj-column>
     </mj-section>
@@ -70,26 +70,26 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f8fafc">
         <mj-text mj-class="heading-2" padding="0 0 16px">
-          Booking Details
+          Данни за резервацията
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Property:</strong><br />
+          <strong>Имот:</strong><br />
           {{property_name}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Check-in – Check-out:</strong><br />
+          <strong>Настаняване – Напускане:</strong><br />
           {{start_date}} – {{end_date}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Number of Nights:</strong><br />
+          <strong>Брой нощувки:</strong><br />
           {{num_nights}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Guests:</strong><br />
+          <strong>Гости:</strong><br />
           {{num_guests}}
         </mj-text>
       </mj-column>
@@ -99,22 +99,22 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 16px">
-          Payment Summary
+          Обобщение на плащането
         </mj-text>
 
         <mj-table>
           <tr style="border-bottom: 1px solid #e2e8f0; text-align: left;">
-            <th style="padding: 0 12px 8px 0; font-weight: 600; color: #0f172a;">Description</th>
-            <th style="padding: 0 12px 8px; text-align: right; font-weight: 600; color: #0f172a;">Amount</th>
+            <th style="padding: 0 12px 8px 0; font-weight: 600; color: #0f172a;">Описание</th>
+            <th style="padding: 0 12px 8px; text-align: right; font-weight: 600; color: #0f172a;">Сума</th>
           </tr>
           <tr style="border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px 12px 12px 0; color: #475569;">Room Rate × {{num_nights}} nights</td>
+            <td style="padding: 12px 12px 12px 0; color: #475569;">Цена за нощувка × {{num_nights}} нощувки</td>
             <td style="padding: 12px 12px 12px; text-align: right; color: #475569;">{{currency}} {{room_rate}}</td>
           </tr>
           {{cleaning_fee_row}}
           {{service_fee_row}}
           <tr style="background-color: #f0fdf4;">
-            <td style="padding: 12px 12px 12px 0; font-weight: 600; color: #15803d;">Total Paid</td>
+            <td style="padding: 12px 12px 12px 0; font-weight: 600; color: #15803d;">Общо платено</td>
             <td style="padding: 12px 12px 12px; text-align: right; font-weight: 600; color: #15803d;">{{currency}} {{total_amount}}</td>
           </tr>
         </mj-table>
@@ -125,7 +125,7 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Payment Method
+          Начин на плащане
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
           {{payment_method}}
@@ -137,16 +137,16 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          What's Next?
+          Какво предстои?
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <strong>1. Check-in Info:</strong> You'll receive check-in details 24 hours before arrival.
+          <strong>1. Информация за настаняване:</strong> Ще получите данни за настаняване 24 часа преди пристигането.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>2. Contact Info:</strong> The owner will provide contact details for questions before arrival.
+          <strong>2. Контактна информация:</strong> Собственикът ще предостави контактни данни за въпроси преди пристигането.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>3. Enjoy:</strong> Check in and enjoy your stay! Don't forget to follow house rules.
+          <strong>3. Приятен престой:</strong> Настанете се и се насладете на престоя си! Не забравяйте да спазвате правилата на имота.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -155,7 +155,7 @@
     <mj-section padding="20px">
       <mj-column>
         <mj-button href="{{view_booking_url}}" background-color="#2563eb" color="#ffffff" align="center" padding="16px">
-          View Your Booking
+          Вижте вашата резервация
         </mj-button>
       </mj-column>
     </mj-section>
@@ -164,7 +164,7 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f8fafc">
         <mj-text mj-class="footer-text" padding="0" align="center">
-          <a href="{{download_receipt_url}}" style="color:#2563eb; text-decoration:none;">Download Receipt</a>
+          <a href="{{download_receipt_url}}" style="color:#2563eb; text-decoration:none;">Изтегли разписката</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -173,10 +173,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          Questions about your payment? Contact support.
+          Въпроси относно плащането? Свържете се с поддръжката.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
-          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Център за помощ</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -185,10 +185,10 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter. All rights reserved.
+          © 2026 Brighter. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
-          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>
         </mj-text>
       </mj-column>
     </mj-section>

@@ -1,7 +1,7 @@
-<mjml lang="en" dir="ltr">
+<mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>New Booking Request - Brighter</mj-title>
-    <mj-preview>New booking request for {{property_name}}</mj-preview>
+    <mj-title>Нова заявка за резервация - Brighter</mj-title>
+    <mj-preview>Нова заявка за резервация за {{property_name}}</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
       <mj-all font-family="Inter, Arial, sans-serif" />
@@ -41,10 +41,10 @@
     <mj-section background-color="#f59e0b" background-size="cover" padding="40px 20px">
       <mj-column padding="0">
         <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
-          New Booking Request
+          Нова заявка за резервация
         </mj-text>
         <mj-text mj-class="body-text" color="#fef3c7" align="center" padding="12px 20px 0">
-          Action required: Please review and confirm this booking
+          Необходимо действие: Моля, прегледайте и потвърдете тази резервация
         </mj-text>
       </mj-column>
     </mj-section>
@@ -53,29 +53,29 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 16px">
-          Booking Information
+          Данни за резервацията
         </mj-text>
 
         <!-- Property Name -->
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Property:</strong><br />
+          <strong>Имот:</strong><br />
           {{property_name}}
         </mj-text>
 
         <!-- Check-in & Check-out -->
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Check-in:</strong><br />
+          <strong>Настаняване:</strong><br />
           {{start_date}}
         </mj-text>
 
         <mj-text mj-class="body-text" padding="8px 0">
-          <strong>Check-out:</strong><br />
+          <strong>Напускане:</strong><br />
           {{end_date}}
         </mj-text>
 
         <!-- Status Badge -->
         <mj-text mj-class="body-text" padding="16px 0 0" color="#dc2626" font-weight="600">
-          ⏳ Awaiting Your Response
+          ⏳ Очаква вашия отговор
         </mj-text>
       </mj-column>
     </mj-section>
@@ -84,13 +84,13 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f8fafc" border-left="4px solid #2563eb">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Guest Information
+          Информация за госта
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          The guest will receive updates about their booking status, so respond promptly.
+          Гостът ще получава актуализации за статуса на резервацията си, затова отговорете своевременно.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          Once you confirm, the guest can proceed with payment and complete their reservation.
+          След като потвърдите, гостът може да продължи с плащането и да завърши резервацията си.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -99,12 +99,12 @@
     <mj-section padding="20px">
       <mj-column padding="0 10px">
         <mj-button href="{{approve_url}}" background-color="#16a34a" color="#ffffff" align="center" width="100%">
-          ✓ Confirm Booking
+          ✓ Потвърди резервацията
         </mj-button>
       </mj-column>
       <mj-column padding="0 10px">
         <mj-button href="{{decline_url}}" background-color="#dc2626" color="#ffffff" align="center" width="100%">
-          ✕ Decline Booking
+          ✕ Откажи резервацията
         </mj-button>
       </mj-column>
     </mj-section>
@@ -113,10 +113,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          Review in Dashboard
+          Преглед в таблото
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          You can also view and manage all booking requests from your owner dashboard.
+          Можете също да преглеждате и управлявате всички заявки за резервация от таблото си за собственик.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -125,7 +125,7 @@
     <mj-section padding="20px">
       <mj-column>
         <mj-button href="{{dashboard_url}}" background-color="#2563eb" color="#ffffff" align="center" padding="16px">
-          Go to Dashboard
+          Към таблото
         </mj-button>
       </mj-column>
     </mj-section>
@@ -134,10 +134,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          Need help managing your booking? Contact our support team.
+          Нуждаете се от помощ с управлението на резервацията? Свържете се с нашия екип за поддръжка.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
-          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Owner Help</a>
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Помощ за собственици</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -146,10 +146,10 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter. All rights reserved.
+          © 2026 Brighter. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
-          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>
         </mj-text>
       </mj-column>
     </mj-section>

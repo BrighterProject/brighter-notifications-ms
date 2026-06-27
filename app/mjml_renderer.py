@@ -14,6 +14,9 @@ _MJML_CMD = str(_MJML_BIN) if _MJML_BIN.exists() else "mjml"
 # Populated by warm_template_cache() on app startup — not at import time.
 _TEMPLATE_CACHE: dict[str, tuple[str, str]] = {}
 
+# Matches leftover {{ key }} placeholders not supplied by the caller.
+_PLACEHOLDER_RE = re.compile(r"\{\{\s*[\w.]+\s*\}\}")
+
 
 def _compile_mjml_file(mjml_path: Path) -> str:
     """Compile a single MJML file to HTML via the CLI.
@@ -52,9 +55,7 @@ def _compile_mjml_file(mjml_path: Path) -> str:
         raise RuntimeError(f"Failed to compile MJML {mjml_path}: {e.stderr}") from e
     except FileNotFoundError as e:
         logger.error("mjml CLI not found. Is it installed? {}", e)
-        raise RuntimeError(
-            "mjml CLI not found. Install with: npm install -D mjml"
-        ) from e
+        raise RuntimeError("mjml CLI not found. Install with: npm install -D mjml") from e
 
 
 def _extract_subject(html: str, template_name: str) -> str:
@@ -105,9 +106,7 @@ def warm_template_cache() -> None:
     _TEMPLATE_CACHE = _build_template_cache()
 
 
-def render_mjml_template(
-    template_name: str, data: dict[str, Any]
-) -> tuple[str, str]:
+def render_mjml_template(template_name: str, data: dict[str, Any]) -> tuple[str, str]:
     """Render a pre-compiled MJML template by substituting {{key}} placeholders.
 
     All substitution happens via plain str.replace on the cached HTML — no
@@ -130,5 +129,9 @@ def render_mjml_template(
     for key, value in data.items():
         if value is not None:
             html = html.replace(f"{{{{{key}}}}}", str(value))
+
+    # Strip any placeholders the caller did not supply so raw {{key}} tokens
+    # never leak into a delivered email.
+    html = _PLACEHOLDER_RE.sub("", html)
 
     return subject, html

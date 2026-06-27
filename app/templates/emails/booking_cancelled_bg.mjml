@@ -1,7 +1,7 @@
-<mjml lang="en" dir="ltr">
+<mjml lang="bg" dir="ltr">
   <mj-head>
-    <mj-title>Booking Cancelled - Brighter</mj-title>
-    <mj-preview>Your booking has been cancelled</mj-preview>
+    <mj-title>Резервацията е отменена - Brighter</mj-title>
+    <mj-preview>Вашата резервация е отменена</mj-preview>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <mj-attributes>
       <mj-all font-family="Inter, Arial, sans-serif" />
@@ -41,10 +41,10 @@
     <mj-section background-color="#dc2626" padding="40px 20px">
       <mj-column padding="0">
         <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
-          Booking Cancelled
+          Резервацията е отменена
         </mj-text>
         <mj-text mj-class="body-text" color="#fee2e2" align="center" padding="12px 20px 0">
-          Your booking has been cancelled as requested
+          Вашата резервация е отменена по ваше искане
         </mj-text>
       </mj-column>
     </mj-section>
@@ -53,30 +53,30 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 16px">
-          Cancellation Information
+          Информация за отмяната
         </mj-text>
 
         <!-- Booking Reference -->
         <mj-text mj-class="body-text" padding="8px 0" color="#64748b">
-          <strong>Booking ID:</strong><br />
+          <strong>№ на резервация:</strong><br />
           {{booking_id}}
         </mj-text>
 
         <!-- Property -->
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Property:</strong><br />
+          <strong>Имот:</strong><br />
           {{property_name}}
         </mj-text>
 
         <!-- Original Dates -->
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Original Dates:</strong><br />
+          <strong>Първоначални дати:</strong><br />
           {{start_date}} – {{end_date}}
         </mj-text>
 
         <!-- Cancellation Date -->
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Cancelled On:</strong><br />
+          <strong>Отменена на:</strong><br />
           {{cancelled_date}}
         </mj-text>
       </mj-column>
@@ -86,16 +86,16 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#fef2f2" border-left="4px solid #dc2626">
         <mj-text mj-class="heading-2" padding="0 0 12px" color="#7f1d1d">
-          Refund Status
+          Статус на възстановяването
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          <strong>Refund Amount:</strong> {{currency}} {{refund_amount}}
+          <strong>Сума за възстановяване:</strong> {{currency}} {{refund_amount}}
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Timeline:</strong> Refunds are typically processed within 5-7 business days. You'll receive a confirmation email when processed.
+          <strong>Срок:</strong> Възстановяванията обикновено се обработват в рамките на 5-7 работни дни. Ще получите потвърдителен имейл, когато бъде обработено.
         </mj-text>
         <mj-text mj-class="body-text" padding="12px 0">
-          <strong>Cancellation Policy:</strong> Your refund was processed according to the property's cancellation policy.
+          <strong>Политика за отмяна:</strong> Вашето възстановяване беше обработено съгласно политиката за отмяна на имота.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -104,10 +104,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#ffffff">
         <mj-text mj-class="heading-2" padding="0 0 12px">
-          What Now?
+          Какво сега?
         </mj-text>
         <mj-text mj-class="body-text" padding="0">
-          We hope you'll consider Brighter for your future travel plans. Browse other properties that match your dates and budget.
+          Надяваме се отново да изберете Brighter за вашите бъдещи пътувания. Разгледайте други имоти, които отговарят на вашите дати и бюджет.
         </mj-text>
       </mj-column>
     </mj-section>
@@ -116,7 +116,7 @@
     <mj-section padding="20px">
       <mj-column>
         <mj-button href="{{browse_properties_url}}" background-color="#2563eb" color="#ffffff" align="center" padding="16px">
-          Browse Other Properties
+          Разгледайте други имоти
         </mj-button>
       </mj-column>
     </mj-section>
@@ -125,10 +125,10 @@
     <mj-section padding="20px">
       <mj-column padding="20px" background-color="#f1f5f9">
         <mj-text mj-class="body-text" padding="0" color="#64748b">
-          If you have questions about this cancellation or your refund, please contact our support team.
+          Ако имате въпроси относно тази отмяна или вашето възстановяване, моля, свържете се с нашия екип за поддръжка.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0" color="#94a3b8">
-          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
+          <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Център за помощ</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -137,10 +137,10 @@
     <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
       <mj-column padding="20px">
         <mj-text mj-class="footer-text" padding="0">
-          © 2026 Brighter. All rights reserved.
+          © 2026 Brighter. Всички права запазени.
         </mj-text>
         <mj-text mj-class="footer-text" padding="8px 0 0">
-          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Отписване</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Политика за поверителност</a>
         </mj-text>
       </mj-column>
     </mj-section>
