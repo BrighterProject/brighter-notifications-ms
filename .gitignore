@@ -10,3 +10,6 @@ dist/
 *.egg-info/
 node_modules/
 bun.lock
+
+# Generated OpenAPI export (produced on demand for brighter-docs)
+openapi.json
