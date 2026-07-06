@@ -1,0 +1,121 @@
+<mjml lang="en" dir="ltr">
+  <mj-head>
+    <mj-title>Complete your check-in - Brighter</mj-title>
+    <mj-preview>Add your guest details before you arrive — secure and encrypted</mj-preview>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Inter, Arial, sans-serif" />
+      <mj-text padding="0" line-height="1.6" color="#1e293b" />
+      <mj-button font-weight="600" border-radius="6px" inner-padding="12px 28px" />
+      <mj-class name="heading-1" font-size="32px" font-weight="700" color="#0f172a" />
+      <mj-class name="heading-2" font-size="20px" font-weight="600" color="#0f172a" />
+      <mj-class name="body-text" font-size="14px" color="#475569" />
+      <mj-class name="footer-text" font-size="12px" color="#94a3b8" />
+    </mj-attributes>
+    <mj-raw>
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+    </mj-raw>
+    <mj-style inline="inline">
+      .lock-badge { display: inline-block; background: #1d4ed8; color: white; padding: 8px 16px; border-radius: 24px; font-size: 12px; font-weight: 600; }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f8fafc">
+    <!-- Header -->
+    <mj-section padding="20px 0" background-color="#ffffff">
+      <mj-column padding="20px">
+        <mj-text mj-class="heading-2" color="#2563eb">
+          Brighter
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="#2563eb" padding="40px 20px">
+      <mj-column padding="0">
+        <mj-text mj-class="heading-1" color="#ffffff" align="center" padding="0 20px">
+          Complete your check-in
+        </mj-text>
+        <mj-text mj-class="body-text" color="#dbeafe" align="center" padding="12px 20px 0">
+          Bulgarian law requires us to register each guest before your stay. It only takes a minute.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Instructions -->
+    <mj-section padding="20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="heading-2" padding="0 0 16px">
+          What you need to do
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0 0 12px">
+          Open the secure check-in page below and add the full name, date of birth,
+          and ID or passport details for each guest staying with you
+          ({{num_guests}} in total).
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          <strong>Travelling with others?</strong> Share this same link with your travel
+          companions — anyone can open it and add their own details. Your progress updates
+          in real time as each guest completes their part.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- CTA Button -->
+    <mj-section padding="8px 20px 20px">
+      <mj-column>
+        <mj-button href="{{checkin_url}}" background-color="#2563eb" color="#ffffff" align="center" padding="16px">
+          Complete check-in
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Security messaging -->
+    <mj-section padding="0 20px 20px">
+      <mj-column padding="20px" background-color="#eff6ff" border-left="4px solid #2563eb">
+        <mj-text mj-class="heading-2" padding="0 0 12px" color="#1d4ed8">
+          Your data is protected
+        </mj-text>
+        <mj-text mj-class="body-text" padding="0">
+          This page is served over an <strong>encrypted HTTPS connection</strong>, and your
+          national ID and document numbers are <strong>encrypted at rest</strong>. We only
+          keep this information for as long as the law requires, then it is automatically deleted.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Fallback link -->
+    <mj-section padding="0 20px 20px">
+      <mj-column padding="20px" background-color="#f1f5f9">
+        <mj-text mj-class="footer-text" padding="0" color="#64748b">
+          If the button does not work, copy and paste this link into your browser:
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0" color="#2563eb">
+          {{checkin_url}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Support -->
+    <mj-section padding="0 20px 20px">
+      <mj-column padding="20px" background-color="#ffffff">
+        <mj-text mj-class="footer-text" padding="0" color="#94a3b8">
+          Have questions? <a href="mailto:support@brighter.bg" style="color:#2563eb; text-decoration:none;">support@brighter.bg</a> • <a href="{{help_url}}" style="color:#2563eb; text-decoration:none;">Help Center</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section padding="20px 0" background-color="#ffffff" border-top="1px solid #e2e8f0">
+      <mj-column padding="20px">
+        <mj-text mj-class="footer-text" padding="0">
+          © 2026 Brighter. All rights reserved.
+        </mj-text>
+        <mj-text mj-class="footer-text" padding="8px 0 0">
+          <a href="{{unsubscribe_url}}" style="color:#2563eb; text-decoration:none;">Unsubscribe</a> • <a href="{{privacy_url}}" style="color:#2563eb; text-decoration:none;">Privacy Policy</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -13,6 +13,7 @@ _TEMPLATE_MAP: dict[NotificationType, str] = {
     NotificationType.BOOKING_CANCELLED: "booking_cancelled",
     NotificationType.PAYMENT_RECEIPT: "payment_receipt",
     NotificationType.PROPERTY_APPROVED: "property_approved",
+    NotificationType.CHECKIN_LINK: "checkin_link",
 }
 
 
@@ -69,6 +70,14 @@ def _build_computed_vars(
         Dict of computed placeholder names to substitution strings.
     """
     computed: dict[str, str] = {}
+
+    if notification_type is NotificationType.CHECKIN_LINK:
+        base = settings.frontend_base_url.rstrip("/")
+        token = str(data.get("token", ""))
+        # Deterministic per-booking check-in link. The optional {-$locale}
+        # segment on the frontend route means the locale-less path resolves to
+        # the default locale, so no locale prefix is needed here.
+        computed["checkin_url"] = f"{base}/checkin/{token}"
 
     if notification_type is NotificationType.BOOKING_CONFIRMED:
         start_date = str(data.get("start_date", ""))
