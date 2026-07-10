@@ -24,6 +24,7 @@ class NotificationType(StrEnum):
     BOOKING_CANCELLED = "booking_cancelled"
     PAYMENT_RECEIPT = "payment_receipt"
     PROPERTY_APPROVED = "property_approved"
+    CHECKIN_LINK = "checkin_link"
 
 
 class NotificationResponse(BaseModel):

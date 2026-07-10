@@ -156,6 +156,42 @@ class TestMJMLTemplates:
         assert "Sofia" in html
         assert len(html) > 1000
 
+    def test_checkin_link(self):
+        """Check-in link template renders the encrypted-messaging lobby email."""
+        data = {
+            "token": "eyJhbGciOiJIUzI1NiJ9.abc.def",
+            "num_guests": 4,
+            "checkin_url": "https://brighter.bg/checkin/eyJhbGciOiJIUzI1NiJ9.abc.def",
+            "help_url": "https://brighter.bg/help",
+            "unsubscribe_url": "https://brighter.bg/unsubscribe",
+            "privacy_url": "https://brighter.bg/privacy",
+        }
+
+        subject, html = render(NotificationType.CHECKIN_LINK, data)
+
+        assert "Check-in" in subject or "check-in" in subject.lower()
+        assert "https://brighter.bg/checkin/eyJhbGciOiJIUzI1NiJ9.abc.def" in html
+        assert "encrypted" in html.lower()
+        assert "{{" not in html  # no leftover placeholders
+        assert len(html) > 1000
+
+    def test_checkin_link_bg_locale(self):
+        """Bulgarian check-in link template is selected for the bg locale."""
+        data = {
+            "token": "tok123",
+            "num_guests": 2,
+            "checkin_url": "https://brighter.bg/checkin/tok123",
+        }
+        subject, html = render(NotificationType.CHECKIN_LINK, data, locale="bg")
+        assert "https://brighter.bg/checkin/tok123" in html
+        assert len(html) > 1000
+
+    def test_checkin_link_url_computed_from_token(self):
+        """checkin_url is derived from token + FRONTEND_BASE_URL when not passed."""
+        data = {"token": "rawtoken", "num_guests": 1}
+        _, html = render(NotificationType.CHECKIN_LINK, data)
+        assert "/checkin/rawtoken" in html
+
     def test_booking_confirmed_checkin_with_time(self):
         """Check-in display includes time when check_in_time is provided."""
         data = {
